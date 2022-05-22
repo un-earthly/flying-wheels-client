@@ -8,12 +8,24 @@ import Register from "./Pages/UserAuthentication/Register";
 import Login from "./Pages/UserAuthentication/Login";
 import { ToastContainer } from "react-toastify";
 import 'animate.css';
+import { useState } from "react";
+import Loading from "./SharedComponents/Loading";
+import PurchaseProduct from "./SharedComponents/PurchaseProduct";
+
 function App() {
+  const [loadin, setLoadin] = useState(true)
+  window.addEventListener('load', () => {
+    setLoadin(false)
+  });
+  if (loadin) {
+    return <Loading />
+  }
   return (
     <div className="App">
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/portfolio' element={<MyPortfolio />} />
+        <Route path='/purchase/:id' element={<PurchaseProduct />} />
         <Route path='/blogs' element={<Blogs />} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />

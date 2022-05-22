@@ -3,11 +3,12 @@ import React from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { Link, NavLink } from 'react-router-dom'
 import auth from '../firebase.init'
+import Loading from './Loading'
 
 export default function Navbar() {
   const [user, loading] = useAuthState(auth)
   if (loading) {
-    return <p>Loading</p>
+    return <Loading />
   }
   const menuLinks = <>
     <NavLink className="text-gray-300 duration-500 hover:text-white" to='/'>Home</NavLink>

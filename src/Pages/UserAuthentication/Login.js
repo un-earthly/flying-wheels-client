@@ -18,6 +18,9 @@ export default function Login() {
     if (user) {
         navigate('/')
     }
+    if (loading || resetLoading) {
+        console.log('resetin')
+    }
     return (
         <div className='bg-white md:w-1/2 mx-auto rounded px-8 pb-8 mb-4 space-y-7 mt-16'>
             <form className='space-y-10' onSubmit={handleSubmit(onSubmit)}>

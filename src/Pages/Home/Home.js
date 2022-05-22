@@ -11,9 +11,9 @@ export default function Home() {
         <div>
             <HomeBanner />
             <HomeProduction />
-            <BusinessSummary />
             <HowWeWork />
             <Industries />
+            <BusinessSummary />
             <HomeReviews />
             <Footer />
         </div>
