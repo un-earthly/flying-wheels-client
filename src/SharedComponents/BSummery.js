@@ -9,7 +9,7 @@ export default function BSummery({ sumInfo }) {
                 <CountUp end={count} />{sign}</p>
             <div className='flex text-3xl items-center space-x-2'>
                 <i class={`bi bi-${icon}`}></i>
-                <p>{tagLine}</p>
+                <p className='text-center'>{tagLine}</p>
             </div>
         </div>
     )

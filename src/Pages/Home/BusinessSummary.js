@@ -22,7 +22,7 @@ export default function BusinessSummary() {
   ]
   return (
     <div className='bg-gradient-to-b to-[#3B2667] from-[#BC78EC] text-white'>
-      <div className="flex w-full items-center justify-between p-16">
+      <div className="flex lg:flex-row w-full items-center justify-between p-16 flex-col lg:space-y-0 space-y-20">
         {
           summeries.map((s, i) => <BSummery sumInfo={s} key={i} />)
         }
