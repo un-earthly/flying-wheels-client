@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Register from "./Pages/UserAuthentication/Register";
 import Login from "./Pages/UserAuthentication/Login";
 import { ToastContainer } from "react-toastify";
-
+import 'animate.css';
 function App() {
   return (
     <div className="App">

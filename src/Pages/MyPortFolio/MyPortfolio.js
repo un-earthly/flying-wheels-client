@@ -1,7 +1,10 @@
 import React from 'react'
+import Navbar from '../../SharedComponents/Navbar'
 
 export default function MyPortfolio() {
     return (
-        <div>MyPortfolio</div>
+        <div>
+            <Navbar />
+            MyPortfolio</div>
     )
 }

@@ -1,21 +1,26 @@
 import React from 'react'
-import { useAuthState, useCreateUserWithEmailAndPassword, useSendPasswordResetEmail } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import auth from '../../firebase.init';
 import useShowPass from '../../Hooks/useShowPass';
+import Loading from '../../SharedComponents/Loading';
 
 export default function Register() {
     const navigate = useNavigate()
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [createUser, user, loading, error] = useCreateUserWithEmailAndPassword(auth)
-    const onSubmit = data => (
-        createUser(data.email, data.password)
-    );
+    const [updateProfile, updating, updaingFailed] = useUpdateProfile(auth)
+    const onSubmit = async (data) => {
+        await createUser(data.email, data.password)
+        await updateProfile({ displayName: data.name })
+    };
     const [show, updateShow] = useShowPass()
     if (user) {
         navigate('/')
+    }
+    if (loading || updating) {
+        return <Loading />
     }
     return (
         <div className='bg-white md:w-1/2 mx-auto rounded px-8 pb-8 mb-4 space-y-7 mt-16'>
@@ -41,6 +46,7 @@ export default function Register() {
                     <p className={`${show ? 'text-success' : 'text-error'} cursor-pointer`} onClick={updateShow}>{show ? 'Hide' : 'Show'} Password</p>
                 </label>
                 {error && <span className="text-error">{error.message}</span>}
+                {updaingFailed && <span className="text-error">{updaingFailed.message}</span>}
                 <button className="btn w-full duration-500 hover:bg-transparent hover:text-black my-6">Register</button>
                 <div className='flex justify-between mx-auto'>
                     <p>Already Have An Account?<Link to='/login' className='text-info underline ml-2 font-bold'>Login Now.</Link></p>

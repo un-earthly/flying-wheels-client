@@ -6,7 +6,6 @@ import HowWeWork from './HowWeWork'
 import HomeProduction from './HomeProduction'
 import Footer from '../../SharedComponents/Footer'
 import Industries from './Industries '
-
 export default function Home() {
     return (
         <div>

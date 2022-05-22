@@ -4,6 +4,23 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+    font-family: 'Poppins';
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #003c3ba6;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 126, 148, 0.456);
+    opacity: 0.3;
+}
+
 .active {
     font-weight: 700;
 }
