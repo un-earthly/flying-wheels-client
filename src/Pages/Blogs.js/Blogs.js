@@ -1,7 +1,10 @@
 import React from 'react'
+import Navbar from '../../SharedComponents/Navbar'
 
 export default function Blogs() {
     return (
-        <div>Blogs</div>
+        <div>
+            <Navbar />
+            Blogs</div>
     )
 }
