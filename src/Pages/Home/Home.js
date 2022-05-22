@@ -5,14 +5,14 @@ import HomeReviews from './HomeReviews'
 import HowWeWork from './HowWeWork'
 import HomeProduction from './HomeProduction'
 import Footer from '../../SharedComponents/Footer'
-import Industries from './Industries '
+import HomeAbout from './HomeAbout'
 export default function Home() {
     return (
         <div>
             <HomeBanner />
             <HomeProduction />
             <HowWeWork />
-            <Industries />
+            <HomeAbout />
             <BusinessSummary />
             <HomeReviews />
             <Footer />

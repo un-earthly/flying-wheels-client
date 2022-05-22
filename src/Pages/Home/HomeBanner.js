@@ -13,7 +13,7 @@ export default function HomeBanner() {
                     <button className=' animate__animated animate__backInLeft uppercase hover:bg-black duration-500 hover:border-black text-white border py-3 bg-transparent rounded-full border-white px-12 mt-5'>get a quote <i className="bi bi-arrow-right"></i></button>
                 </div>
                 <div className="lg:w-1/4 lg:flex items-center justify-center flex-col hidden absolute right-12 bottom-24 space-y-4">
-                    <p className="animate__animated animate__backInRight animate__delay-3s text-right font-semibold tracking-wider text-4xl font-[Yellowtail] text-white">Since 2015</p>
+                    <p className="animate__animated animate__backInRight animate__delay-3s text-right font-semibold tracking-wider text-4xl font-[Yellowtail] text-white">Since 2012</p>
                     <button className=' animate__animated animate__backInRight animate__delay-4s uppercase hover:bg-black duration-500 hover:border-black text-white border py-3 bg-transparent rounded-full border-white px-12 mt-5'>Explore Our Journey <i className="bi bi-arrow-right"></i></button>
                 </div>
             </div>

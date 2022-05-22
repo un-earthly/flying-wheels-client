@@ -3,7 +3,6 @@ import Blogs from "./Pages/Blogs.js/Blogs";
 import Home from "./Pages/Home/Home";
 import MyPortfolio from "./Pages/MyPortFolio/MyPortfolio";
 import Error from "./SharedComponents/Error";
-import 'react-toastify/dist/ReactToastify.css';
 import Register from "./Pages/UserAuthentication/Register";
 import Login from "./Pages/UserAuthentication/Login";
 import { ToastContainer } from "react-toastify";
@@ -11,6 +10,7 @@ import 'animate.css';
 import { useState } from "react";
 import Loading from "./SharedComponents/Loading";
 import PurchaseProduct from "./SharedComponents/PurchaseProduct";
+import Helmet from "react-helmet";
 
 function App() {
   const [loadin, setLoadin] = useState(true)
@@ -22,6 +22,9 @@ function App() {
   }
   return (
     <div className="App">
+      <Helmet>
+        <title>Home - Flying Wheels</title>
+      </Helmet>
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/portfolio' element={<MyPortfolio />} />

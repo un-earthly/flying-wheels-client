@@ -27,11 +27,13 @@ export default function HomeProduction() {
     new Product('Mid section wheels', 'https://guides.wiggle.co.uk/sites/default/files/resize/u1938/reynolds-ar-41-carbon-disc-road-wheelset_01-400x400.jpg', 'These wheels are not as popular or easily noticeable as a deep section alternative. This is largely due to a common misunderstanding that a deeper wheel means faster and better. This is not necessarily the case. Your riding style and characteristics may lean towards one wheel type more than another. A mid section wheel, however, means you can reap the benefits of a lightweight rim, combined with the aerodynamic gains of a deeper section. Lots of riders highly recommend them for all-round use, as theyre light enough for climbing and fast enough for the flat roads.', 50, 10000, 20)
   ]
   return (
-    <div className='my-20'>
+    <div className='my-20 relative'>
+      <img src="https://manufacturer.stylemixthemes.com/industrial/wp-content/uploads/sites/2/2018/08/dots.png" className='absolute animate-bounce -top-40' alt="" />
+      <img src="https://manufacturer.stylemixthemes.com/industrial/wp-content/uploads/sites/2/2018/08/dots.png" className='absolute animate-pulse right-10 top-full' alt="" />
       <p className="text-5xl mb-20 text-center font-bold">Some Of Our Wheels</p>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
         {products.map((p, i) => <Card key={i} id={i} product={p} />)}
       </div>
-      HomeProduction</div>
+    </div>
   )
 }
