@@ -29,8 +29,8 @@ export default function HomeReviews() {
   return (
     <div className='my-20 relative'>
 
-      <p className="text-5xl absolute text-gray-200 mt-32 text-center font-bold animate-pulse duration-500">Testimonials</p>
-      <p className="text-center text-5xl my-10 capitalize font-bold">From Our Clients</p>
+      <p className="text-5xl absolute text-gray-200 mt-10 text-center font-bold animate-pulse duration-500">Testimonials</p>
+      {/* <p className="text-center text-5xl my-10 capitalize font-bold">From Our Clients</p> */}
       <Carousel infiniteLoop={true} showStatus={false} showThumbs={false} autoPlay={true}>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 px-6">
           {

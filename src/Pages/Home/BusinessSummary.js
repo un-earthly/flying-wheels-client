@@ -21,15 +21,15 @@ export default function BusinessSummary() {
     new Sum('Big Achivements', 18, '', 'trophy'),
   ]
   return (
-    <>
-      <h1 className="text-5xl font-bold text-center my-10 animate__animated animate__fadeInRight">Buisness Summery</h1>
-      <div className='bg-gradient-to-b to-[#3B2667] from-[#BC78EC] text-white'>
+    <div className='my-36 relative'>
+      <h1 className="text-5xl font-bold text-center my-10 animate-pulse duration-500 absolute -top-16 text-gray-200 -z-10 right-4">Buisness Summery</h1>
+      <div className='bg-gradient-to-b to-[#3b2667] from-[#bc78ecab] text-white'>
         <div className="flex lg:flex-row w-full items-center justify-between p-16 flex-col lg:space-y-0 space-y-20">
           {
             summeries.map((s, i) => <BSummery sumInfo={s} key={i} />)
           }
         </div>
       </div>
-    </>
+    </div>
   )
 }
