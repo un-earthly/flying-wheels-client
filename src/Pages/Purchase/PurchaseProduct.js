@@ -13,8 +13,8 @@ export default function PurchaseProduct() {
         const { data } = await axiosPrivate.get(`http://localhost/products/${id}`)
         return data
     })
-    const [user, loading] = useAuthState(auth)
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const [user] = useAuthState(auth)
+    const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = data => {
         console.log(data)
     }
@@ -67,7 +67,7 @@ export default function PurchaseProduct() {
                     <button className="btn w-full duration-500 hover:bg-transparent hover:text-black my-6">Proceed To Pay</button>
 
                 </form>
-                
+
             </div>
             <div className='lg:p-20 p-5 items-center flex-col flex space-y-5 col-span-2'>
                 <img className='w-2/4 object-contain' src={img} alt={name} />
