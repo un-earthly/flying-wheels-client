@@ -1,22 +1,31 @@
+import axios from 'axios';
 import React from 'react'
 import { useSendPasswordResetEmail, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import auth from '../../firebase.init';
 import useShowPass from '../../Hooks/useShowPass';
+import Social from '../../SharedComponents/Social';
 export default function Login() {
     const navigate = useNavigate()
     const [sendPasswordResetEmail, resetLoading, resetError] = useSendPasswordResetEmail(auth);
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const [login, user, loading, error] = useSignInWithEmailAndPassword(auth)
     const email = watch(["email"]);
-    const onSubmit = data => (
+    const onSubmit = data => {
+        axios.post('http://localhost/login', { email })
+            .then(res => localStorage.setItem('token', res.data.token))
         login(data.email, data.password)
-    );
+    }
     const [show, updateShow] = useShowPass()
+    const location = useLocation()
+
+    const from = location.state?.from?.pathname
+
     if (user) {
-        navigate('/')
+        axios.put('http://localhost/user', { email: user.user.email, name: user.user.displayName })
+        navigate(from || '/', { replace: true })
     }
     if (loading || resetLoading) {
         console.log('resetin')
@@ -57,6 +66,7 @@ export default function Login() {
                     <p>New Here?<Link to='/register' className='text-info underline ml-2 font-bold'>Register Now.</Link></p>
                 </div>
             </form>
+            <Social />
         </div>
     )
 }

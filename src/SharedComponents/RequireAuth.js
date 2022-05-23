@@ -9,9 +9,7 @@ export default function RequireAuth({ children }) {
     const location = useLocation();
 
     if (loading) {
-        return <>
-            {toast.warning('Please Be patient')}
-        </>
+        return toast.warning('Please Be patient')
     }
     if (!user) {
         return <Navigate to='/login' state={{ from: location }} replace />

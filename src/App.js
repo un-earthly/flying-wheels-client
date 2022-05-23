@@ -9,8 +9,9 @@ import { ToastContainer } from "react-toastify";
 import 'animate.css';
 import { useState } from "react";
 import Loading from "./SharedComponents/Loading";
-import PurchaseProduct from "./SharedComponents/PurchaseProduct";
+import PurchaseProduct from "./Pages/Purchase/PurchaseProduct";
 import Helmet from "react-helmet";
+import RequireAuth from "./SharedComponents/RequireAuth";
 
 function App() {
   const [loadin, setLoadin] = useState(true)
@@ -28,7 +29,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/portfolio' element={<MyPortfolio />} />
-        <Route path='/purchase/:id' element={<PurchaseProduct />} />
+        <Route path='/purchase/:id' element={<RequireAuth><PurchaseProduct /></RequireAuth>} />
         <Route path='/blogs' element={<Blogs />} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
