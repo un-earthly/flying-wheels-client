@@ -14,7 +14,7 @@ export default function Login() {
     const [login, user, loading, error] = useSignInWithEmailAndPassword(auth)
     const email = watch(["email"]);
     const onSubmit = data => {
-        axios.post('http://localhost/login', { email })
+        axios.post('http://localhost/login', { email: data.email })
             .then(res => localStorage.setItem('token', res.data.token))
         login(data.email, data.password)
     }

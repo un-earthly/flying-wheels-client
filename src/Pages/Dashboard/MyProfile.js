@@ -9,13 +9,14 @@ export default function MyProfile() {
   const [query, loading] = useAuthState(auth);
   const [updateProfile, setupdateProfile] = useState(false)
   const { register, handleSubmit, formState: { errors }, reset } = useForm()
-  const { isLoading, data: user } = useQuery("userProfile", () => axiosPrivate.get(`http://localhost/user?email=${query.email}`).then(res => res.data))
+  const { isLoading, data: user, refetch } = useQuery("userProfile", () => axiosPrivate.get(`http://localhost/user?email=${query.email}`).then(res => res.data))
 
 
   const onSubmit = data => {
     axiosPrivate.put('http://localhost/updateProfile', data)
       .then(res => {
         setupdateProfile(false)
+        refetch()
         reset()
       })
   }
@@ -30,13 +31,24 @@ export default function MyProfile() {
       </div>
       <div className='grid grid-cols-1 lg:grid-cols-3 my-10 p-5 space-y-4 lg:space-y-0'>
         <div className="flex flex-col items-center">
-          <img src={user.img} className='rounded-full' alt="Please Add Your avatar" />
+          <img src={user.img || query.photoURL} className='rounded-full w-28' alt="Please Add Your avatar" />
           <button className='btn-error mt-5 btn rounded-full px-12' onClick={() => setupdateProfile(!updateProfile)}>Edit Profile</button>
         </div>
         {updateProfile ?
           <div className="col-span-2 space-y-4">
 
             <form onSubmit={handleSubmit(onSubmit)}>
+              <label className="block text-gray-700 text-sm font-bold mb-2 space-y-3" htmlFor="name">
+                <span>name</span>
+                <input
+                  className="appearance-none border-b focus:border-success outline-none duration-300 w-full py-2 md:text-xl px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="name"
+                  type="text"
+                  defaultValue={user.name || query.displayName}
+                  placeholder="name"
+                  {...register("name", { required: { value: true, message: 'name is required' } })} />
+                {errors.name && <span className="text-error">{errors.name.message}</span>}
+              </label>
               <label className="block text-gray-700 text-sm font-bold mb-2 space-y-3" htmlFor="linkedin">
                 <span>linkedin</span>
                 <input
@@ -44,6 +56,8 @@ export default function MyProfile() {
                   id="linkedin"
                   type="text"
                   placeholder="linkedin"
+                  defaultValue={user.linkedin}
+
                   {...register("linkedin", { required: { value: true, message: 'linked url in is required' } })} />
                 {errors.linkedin && <span className="text-error">{errors.linkedin.message}</span>}
               </label>
@@ -54,6 +68,8 @@ export default function MyProfile() {
                   id="education"
                   type="text"
                   placeholder="education"
+                  defaultValue={user.education}
+
                   {...register("education", { required: { value: true, message: 'education is required' } })} />
                 {errors.education && <span className="text-error">{errors.education.message}</span>}
               </label>
@@ -64,6 +80,7 @@ export default function MyProfile() {
                   id="location"
                   type="text"
                   placeholder="location"
+                  defaultValue={user.phone}
                   {...register("location", { required: { value: true, message: 'education is required' } })} />
                 {errors.location && <span className="text-error">{errors.location.message}</span>}
               </label>
@@ -74,6 +91,7 @@ export default function MyProfile() {
                   id="phone"
                   type="text"
                   placeholder="phone"
+                  defaultValue={user.phone}
                   {...register("phone", { required: { value: true, message: 'phone is required' } })} />
                 {errors.phone && <span className="text-error">{errors.phone.message}</span>}
               </label>
@@ -84,6 +102,7 @@ export default function MyProfile() {
                   id="img"
                   type="text"
                   placeholder="Image"
+                  defaultValue={query.photoURL || user.img}
                   {...register("img", { required: { value: true, message: 'image is required' } })} />
                 {errors.img && <span className="text-error">{errors.img.message}</span>}
               </label>
@@ -95,15 +114,15 @@ export default function MyProfile() {
           <div className="col-span-2 space-y-4">
             <div>
               <p className="text-sm">Name</p>
-              <p className="text-xl">{user?.name}</p>
+              <p className="text-xl">{user?.name || query.displayName}</p>
             </div>
             <div>
               <p className="text-sm">Email</p>
-              <p className="text-xl">{user?.email}</p>
+              <p className="text-xl">{user?.email || query.email}</p>
             </div>
             <div>
               <p className="text-sm">Linked In</p>
-              <p className="text-xl">{user?.linkedin || 'You Havent Added Any Linked In Account'}</p>
+              <p className="text-xl break-words">{user?.linkedin || 'You Havent Added Any Linked In Account'}</p>
             </div>
             <div>
               <p className="text-sm">Education</p>

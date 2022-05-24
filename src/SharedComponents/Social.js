@@ -13,7 +13,6 @@ export default function Social() {
         const email = user.user.email
         axios.post('http://localhost/login', { email })
             .then(res => localStorage.setItem('token', res.data.token))
-        console.log(user)
         axios.put('http://localhost/user', { email: user.user.email, name: user.user.displayName })
 
         navigate(from || '/', { replace: true })
