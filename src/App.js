@@ -40,6 +40,7 @@ function App() {
         <Route path='/portfolio' element={<MyPortfolio />} />
         <Route path='/purchase/:id' element={<RequireAuth><PurchaseProduct /></RequireAuth>} />
         <Route path='/dashboard' element={<RequireAuth><Dashboard /></RequireAuth>}>
+          <Route index element={<MyProfile />} />
           <Route index path='myprofile' element={<MyProfile />} />
           <Route path='myorders' element={<MyOrder />} />
           <Route path='myreview' element={<MyReview />} />

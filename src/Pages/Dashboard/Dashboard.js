@@ -1,4 +1,5 @@
 import React from 'react'
+import Helmet from 'react-helmet'
 import { Link, Outlet } from 'react-router-dom'
 import Navbar from '../../SharedComponents/Navbar'
 
@@ -9,6 +10,9 @@ export default function Dashboard() {
             <div className="drawer drawer-mobile">
                 <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content p-4">
+                    <Helmet>
+                        <title>Dashboard - Flying Wheels</title>
+                    </Helmet>
                     <Outlet />
                 </div>
                 <div className="drawer-side">

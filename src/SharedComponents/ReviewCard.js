@@ -1,7 +1,7 @@
 import React from 'react'
 
-export default function ReviewCard({ review }) {
-    const { img, name, desc, ratings } = review
+export default function ReviewCard({ userReview }) {
+    const { img, name, review, ratings } = userReview
     return (
         <div className="min-w-full px-8 py-4 mx-auto mt-16 border-2 border-blue-500 rounded-lg text-left">
             <div className="flex justify-center -mt-16 md:justify-end">
@@ -13,7 +13,7 @@ export default function ReviewCard({ review }) {
                 <span>{ratings}/5</span>
             </div>
 
-            <p className="mt-2 text-gray-900">{desc}</p>
+            <p className="mt-2 text-gray-900">{review}</p>
 
             <div className="flex justify-end mt-4">
                 <p className="text-xl font-medium text-blue-500">{name}</p>

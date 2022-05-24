@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
+import Helmet from 'react-helmet'
 import { useForm } from 'react-hook-form'
 import { useQuery } from 'react-query'
 import axiosPrivate from '../../api/axiosPrivate'
@@ -26,6 +27,9 @@ export default function MyProfile() {
   }
   return (
     <div className='shadow-md py-5 max-w-3xl'>
+      <Helmet>
+        <title>My Profile - Flying Wheels</title>
+      </Helmet>
       <div className='border-b-2'>
         <h1 className="text-3xl font-bold p-5">My Profile</h1>
       </div>
