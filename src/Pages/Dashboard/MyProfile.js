@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import Helmet from 'react-helmet'
 import { useForm } from 'react-hook-form'
@@ -10,8 +10,11 @@ export default function MyProfile() {
   const [query, loading] = useAuthState(auth);
   const [updateProfile, setupdateProfile] = useState(false)
   const { register, handleSubmit, formState: { errors }, reset } = useForm()
-  const { isLoading, data: user, refetch } = useQuery("userProfile", () => axiosPrivate.get(`http://localhost/user?email=${query.email}`).then(res => res.data))
+  const { isLoading, data: user, refetch } = useQuery("userProfile", () => axiosPrivate.get(`http://localhost/user`).then(res => res.data))
 
+  useEffect(() => {
+    refetch()
+  }, [user, refetch])
 
   const onSubmit = data => {
     axiosPrivate.put('http://localhost/updateProfile', data)
@@ -21,12 +24,12 @@ export default function MyProfile() {
         reset()
       })
   }
-
   if (isLoading || loading) {
-    return <Loading />
+    return console.log(isLoading, loading)
   }
   return (
     <div className='shadow-md py-5 max-w-3xl'>
+      {isLoading && <Loading />}
       <Helmet>
         <title>My Profile - Flying Wheels</title>
       </Helmet>
@@ -35,7 +38,7 @@ export default function MyProfile() {
       </div>
       <div className='grid grid-cols-1 lg:grid-cols-3 my-10 p-5 space-y-4 lg:space-y-0'>
         <div className="flex flex-col items-center">
-          <img src={user.img || query.photoURL} className='rounded-full w-28' alt="Please Add Your avatar" />
+          <img src={user.img || query.photoURL} className='rounded-full w-28 h-28 object-contain' alt={user.name} />
           <button className='btn-error mt-5 btn rounded-full px-12' onClick={() => setupdateProfile(!updateProfile)}>Edit Profile</button>
         </div>
         {updateProfile ?

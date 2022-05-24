@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import Helmet from 'react-helmet'
 import { useForm } from 'react-hook-form'
@@ -11,15 +11,19 @@ import ReviewCard from '../../SharedComponents/ReviewCard'
 export default function MyReview() {
   const { register, handleSubmit, formState: { errors } } = useForm()
   const [user, loading] = useAuthState(auth)
+  const [loadin, setLoadin] = useState(true)
   const onSubmit = data => {
     const { review, ratings } = data
     const { displayName: name, photoURL: img } = user
     axiosPrivate.post('http://localhost/review', { review, name, img, ratings })
   }
-  const { data: myReview, isLoading } = useQuery("myReview", () => axiosPrivate.get('http://localhost/review/byUser')
-    .then(res => res.data))
+  const { data: myReview } = useQuery("myReview", () => axiosPrivate.get('http://localhost/review/byUser')
+    .then(res => {
+      setLoadin(false)
+      return res.data
+    }))
 
-  if (loading || isLoading) {
+  if (loading || loadin) {
     return <Loading />
   }
   return (
@@ -45,7 +49,7 @@ export default function MyReview() {
       </form>
 
 
-      <ReviewCard userReview={myReview} />
+      {loading ? 'Please Wait' : myReview && <ReviewCard userReview={myReview} />}
     </div>
   )
 }

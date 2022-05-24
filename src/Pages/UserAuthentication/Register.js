@@ -17,7 +17,7 @@ export default function Register() {
         axios.post('http://localhost/login', { email: data.email })
             .then(res => localStorage.setItem('token', res.data.token))
         await createUser(data.email, data.password)
-        await updateProfile({ displayName: data.name })
+        await updateProfile({ displayName: data.name, photoURL: data.img })
     };
     const [show, updateShow] = useShowPass()
     const location = useLocation()
@@ -39,6 +39,12 @@ export default function Register() {
                     <span>Name</span>
                     <input className="appearance-none border-b focus:border-success outline-none duration-300 w-full py-2 md:text-xl px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" placeholder="Name" {...register("name", { required: true })} />
                     {errors.name && <span className="text-error">Name Is required</span>}
+
+                </label>
+                <label className="block text-gray-700 text-sm font-bold mb-2 space-y-3" htmlFor="img">
+                    <span>Image</span>
+                    <input className="appearance-none border-b focus:border-success outline-none duration-300 w-full py-2 md:text-xl px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="img" type="text" placeholder="img" {...register("img", { required: true })} />
+                    {errors.img && <span className="text-error">Image Is required</span>}
 
                 </label>
                 <label className="block text-gray-700 text-sm font-bold mb-2 space-y-3" htmlFor="email">
