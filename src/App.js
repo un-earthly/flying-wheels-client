@@ -21,6 +21,7 @@ import RequireAdmin from "./SharedComponents/RequireAdmin";
 import AllProducts from "./Pages/Dashboard/AllProducts";
 import AddProducts from "./Pages/Dashboard/AddProducts";
 import AllOrders from "./Pages/Dashboard/AllOrders";
+import Pay from "./Pages/Purchase/Pay";
 
 function App() {
   const [loadin, setLoadin] = useState(true)
@@ -39,6 +40,7 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/portfolio' element={<MyPortfolio />} />
         <Route path='/purchase/:id' element={<RequireAuth><PurchaseProduct /></RequireAuth>} />
+        <Route path='/pay' element={<RequireAuth><Pay /></RequireAuth>} />
         <Route path='/dashboard' element={<RequireAuth><Dashboard /></RequireAuth>}>
           <Route index element={<MyProfile />} />
           <Route index path='myprofile' element={<MyProfile />} />

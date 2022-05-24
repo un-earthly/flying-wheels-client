@@ -28,7 +28,7 @@ export default function Login() {
         navigate(from || '/', { replace: true })
     }
     if (loading || resetLoading) {
-        console.log('resetin')
+        toast.loading('Please Wait')
     }
     return (
         <div className='bg-white md:w-1/2 mx-auto rounded px-8 pb-8 mb-4 space-y-7 mt-16'>

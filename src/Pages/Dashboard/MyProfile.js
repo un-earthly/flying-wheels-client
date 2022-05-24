@@ -3,6 +3,7 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 import Helmet from 'react-helmet'
 import { useForm } from 'react-hook-form'
 import { useQuery } from 'react-query'
+import { toast } from 'react-toastify'
 import axiosPrivate from '../../api/axiosPrivate'
 import auth from '../../firebase.init'
 import Loading from '../../SharedComponents/Loading'
@@ -25,11 +26,10 @@ export default function MyProfile() {
       })
   }
   if (isLoading || loading) {
-    return console.log(isLoading, loading)
+    return <Loading />
   }
   return (
     <div className='shadow-md py-5 max-w-3xl'>
-      {isLoading && <Loading />}
       <Helmet>
         <title>My Profile - Flying Wheels</title>
       </Helmet>

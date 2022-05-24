@@ -1,30 +1,43 @@
 import axiosPrivate from '../../api/axiosPrivate'
 import React from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import Loading from '../../SharedComponents/Loading'
 import { useQuery } from 'react-query'
 import { useForm } from 'react-hook-form'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import auth from '../../firebase.init'
+import axios from 'axios'
+import { toast } from 'react-toastify'
+import Helmet from 'react-helmet'
 
 export default function PurchaseProduct() {
     const { id } = useParams()
+    const navigate = useNavigate()
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const [user] = useAuthState(auth)
     const { isLoading, data: product } = useQuery("product", async () => {
         const { data } = await axiosPrivate.get(`http://localhost/products/${id}`)
         return data
     })
-    const [user] = useAuthState(auth)
-    const { register, handleSubmit, formState: { errors } } = useForm();
-    const onSubmit = data => {
-        console.log(data)
-    }
     if (isLoading) {
         return <Loading />
     }
     const { displayName, email } = user
     const { img, name, desc, minOrdQty, availableQty, pricePerUnit } = product
+    const onSubmit = data => {
+        const { address, orderQuantity, phone } = data
+        axios.post('http://localhost/purchase', { address, orderQuantity, phone, displayName, email, id, name, paymentStatus: false })
+            .then(res => res.data && navigate('/dashboard/myorders'))
+            .catch(err => {
+                err.request.status === 302 && toast.error('Order Already Exists For This Product') && navigate('/dashboard/myorders')
+            })
+    }
+
     return (
         <div className="grid grid-cols-1 lg:grid-cols-3 h-screen">
+            <Helmet>
+                <title>Order Product {id}-Fly Wheels</title>
+            </Helmet>
             <div className="bg-base-100 p-5">
                 <form className='space-y-10' onSubmit={handleSubmit(onSubmit)}>
                     <label className="block text-gray-700 text-sm font-bold mb-2 space-y-3" htmlFor="name">

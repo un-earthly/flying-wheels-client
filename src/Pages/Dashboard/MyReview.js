@@ -45,7 +45,7 @@ export default function MyReview() {
           <input id="ratings" type="number" className='input bg-gray-200' {...register("ratings", { required: { value: true, message: 'Review is important' }, min: { value: 1, message: 'Rating Cant Be Less Than 1' }, max: { value: 5, message: 'Rating Cant Be more Than 5' }, valueAsNumber: true })} />
           <span className="text-error"> {errors.ratings && errors.ratings?.message}</span>
         </label>
-        <input className='btn w-full' type="submit" value="Post Review" />
+        <input className='btn w-full' disabled={myReview} type="submit" value="Post Review" />
       </form>
 
 
