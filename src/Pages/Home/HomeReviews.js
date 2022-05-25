@@ -6,12 +6,12 @@ import Loading from '../../SharedComponents/Loading'
 import { Carousel } from 'react-responsive-carousel'
 
 export default function HomeReviews() {
-  const { isLoading, data: reviews } = useQuery("review", () => axios.get('http://localhost/review').then(res => res.data))
+  const { isLoading, data: reviews } = useQuery("review", () => axios.get('https://dry-bayou-12932.herokuapp.com/review').then(res => res.data))
   if (isLoading) {
     return <Loading />
   }
   return (
-    <div className='my-20 relative w-1/2 mx-auto'>
+    <div className='my-20 relative lg:w-1/2 mx-auto'>
 
       <p className="text-5xl absolute text-gray-200 mt-10 text-center font-bold animate-pulse duration-500">Testimonials</p>
       <div className="grid grid-cols-1 gap-6 px-6">

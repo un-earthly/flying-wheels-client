@@ -7,7 +7,7 @@ import Loading from '../../SharedComponents/Loading'
 export default function AllOrders() {
   const { isLoading, orders, refetch } = useOrders()
   const updateShipped = id => {
-    axiosPrivate.patch('http://localhost/orders', { id })
+    axiosPrivate.patch('https://dry-bayou-12932.herokuapp.com/orders', { id })
       .then(res => {
         refetch()
       })

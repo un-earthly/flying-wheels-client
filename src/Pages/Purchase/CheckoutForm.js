@@ -14,7 +14,7 @@ export default function CheckOutForm({ product, payAbleAmount: price }) {
     const [err, setErr] = useState('')
     const [clientSecret, setClientSecret] = useState('')
     useEffect(() => {
-        axiosPrivate.post('http://localhost/create-payment-intent', { price })
+        axiosPrivate.post('https://dry-bayou-12932.herokuapp.com/create-payment-intent', { price })
             .then(res => setClientSecret(res.data?.clientSecret))
     }, [price])
 
@@ -59,7 +59,7 @@ export default function CheckOutForm({ product, payAbleAmount: price }) {
         confirmError ? toast.error(confirmError)
             : toast.success(`payment successful with transaction id ${paymentIntent?.id}`)
 
-        paymentIntent && axiosPrivate.patch(`http://localhost/pay/${id}`, { transactionId: paymentIntent.id, paymentStatus: true })
+        paymentIntent && axiosPrivate.patch(`https://dry-bayou-12932.herokuapp.com/pay/${id}`, { transactionId: paymentIntent.id, paymentStatus: true })
             .then(res => navigate('/dashboard/myorders'))
 
 
@@ -85,7 +85,7 @@ export default function CheckOutForm({ product, payAbleAmount: price }) {
                     }}
                 />
                 {err && <span className="text-error block">{err}</span>}
-                <button className='btn btn-success btn-xs' type="submit" disabled={!stripe || !clientSecret}>
+                <button className='btn btn-success btn-xs' type="submit" disabled={!stripe || !clientSecret || err}>
                     Pay
                 </button>
             </form>

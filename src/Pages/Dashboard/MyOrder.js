@@ -8,7 +8,7 @@ import useUser from '../../Hooks/useUser'
 import Loading from '../../SharedComponents/Loading'
 
 export default function MyOrder() {
-  const { data: orders, isLoading, refetch } = useQuery(["orders"], () => axiosPrivate.get('http://localhost/myorders').then(res => res.data))
+  const { data: orders, isLoading, refetch } = useQuery(["orders"], () => axiosPrivate.get('https://dry-bayou-12932.herokuapp.com/myorders').then(res => res.data))
   const [id, setId] = useState('')
   const navigate = useNavigate()
   const { user, isLoading: userLoading } = useUser()
@@ -20,7 +20,7 @@ export default function MyOrder() {
     return <Loading />
   }
   const deleteOrder = () => {
-    axiosPrivate.delete('http://localhost/orders/' + id).then(res => {
+    axiosPrivate.delete('https://dry-bayou-12932.herokuapp.com/orders/' + id).then(res => {
       toast.success('Deleted Successfull')
       refetch()
     })
@@ -59,7 +59,7 @@ export default function MyOrder() {
                 <th>{i + 1}</th>
                 <td>{o.name}</td>
                 <td>{o.paymentStatus ? <p className="text-success">Paid <span className="block"> {o.transactionId}</span></p> : <Link to={`/pay/${o._id}`} className="btn btn-success">Pay Now</Link>}</td>
-                <td>{o.shippedStatus || 'Pending'}</td>
+                <td>{o.shippedStatus ? <span className="text-success">Shipped</span> : 'Pending'}</td>
                 <td>{!o.paymentStatus ? <label htmlFor="deleteModal" onClick={() => setId(o._id)}><i className="bi bi-x bg-error rounded-full text-2xl px-1"></i></label> : <span className="text-error">Order Cant Be Canceled</span>}</td>
               </tr>
             ))}

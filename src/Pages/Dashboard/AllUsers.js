@@ -6,13 +6,13 @@ import axiosPrivate from '../../api/axiosPrivate'
 import Loading from '../../SharedComponents/Loading'
 
 export default function AllUsers() {
-    const { data: user, isLoading, refetch } = useQuery("alluser", () => axios.get('http://localhost/alluser').then(res => res.data))
+    const { data: user, isLoading, refetch } = useQuery("alluser", () => axios.get('https://dry-bayou-12932.herokuapp.com/alluser').then(res => res.data))
 
     if (isLoading) {
         return <Loading></Loading>
     }
     const makeAdmin = id => {
-        axiosPrivate.patch('http://localhost/makeadmin', { id })
+        axiosPrivate.patch('https://dry-bayou-12932.herokuapp.com/makeadmin', { id })
             .then(res => {
                 refetch()
             })

@@ -10,7 +10,7 @@ const stripePromise = loadStripe('pk_test_51L341gHnKmDPsoOitaN1VU4A1hMOWNLHbLdms
 export default function Pay() {
     const { id } = useParams()
     const { isLoading, data: product } = useQuery("product", async () => {
-        const { data } = await axiosPrivate.get(`http://localhost/pay/${id}`)
+        const { data } = await axiosPrivate.get(`https://dry-bayou-12932.herokuapp.com/pay/${id}`)
         return data
     })
     if (isLoading) {

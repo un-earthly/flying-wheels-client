@@ -6,7 +6,7 @@ import axiosPrivate from '../../api/axiosPrivate'
 export default function AddProducts() {
   const { formState: { errors }, register, handleSubmit, reset } = useForm()
   const onSubmit = data => {
-    axiosPrivate.post('http://localhost/product', data)
+    axiosPrivate.post('https://dry-bayou-12932.herokuapp.com/product', data)
       .then(res => reset())
   }
   return (

@@ -7,11 +7,11 @@ import Loading from '../../SharedComponents/Loading';
 
 export default function HomeProduction() {
 
-  const { isLoading, data: products } = useQuery("products", () => axios.get('http://localhost/products').then(res => res.data))
+  const { isLoading, data: products } = useQuery("products", () => axios.get('https://dry-bayou-12932.herokuapp.com/products').then(res => res.data))
   return (
     <div className='my-20 relative'>
-      <img src="https://manufacturer.stylemixthemes.com/industrial/wp-content/uploads/sites/2/2018/08/dots.png" className='absolute animate-bounce -top-40' alt="" />
-      <img src="https://manufacturer.stylemixthemes.com/industrial/wp-content/uploads/sites/2/2018/08/dots.png" className='absolute animate-pulse right-10 top-full' alt="" />
+      <img src="https://manufacturer.stylemixthemes.com/industrial/wp-content/uploads/sites/2/2018/08/dots.png" className='absolute animate-bounce -top-40 hidden lg:block' alt="" />
+      <img src="https://manufacturer.stylemixthemes.com/industrial/wp-content/uploads/sites/2/2018/08/dots.png" className='absolute animate-pulse right-10 top-full hidden lg:block' alt="" />
       <h1 className="text-5xl font-bold text-center lg:my-10 animate-pulse duration-500 absolute -top-16 text-gray-200 -z-10 right-4 -mt-4">Some Of Our Wheels</h1>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 mt-24 lg:my-0">
         {

@@ -15,11 +15,11 @@ export default function PurchaseProduct() {
     const { user, isLoading: userLoading } = useUser()
 
     const { isLoading, data: product } = useQuery(["product", user], async () => {
-        const { data } = await axiosPrivate.get(`http://localhost/products/${id}`)
+        const { data } = await axiosPrivate.get(`https://dry-bayou-12932.herokuapp.com/products/${id}`)
         return data
     })
     useEffect(() => {
-        user.admin && navigate('/dashboard')
+        user?.admin && navigate('/dashboard')
 
     })
     if (isLoading || userLoading) {
@@ -29,7 +29,7 @@ export default function PurchaseProduct() {
     const { img, name, desc, minOrdQty, availableQty, pricePerUnit } = product
     const onSubmit = data => {
         const { address, orderQuantity, phone } = data
-        axiosPrivate.post('http://localhost/purchase', { address, orderQuantity, phone, displayName, email, id, name, pricePerUnit, paymentStatus: false })
+        axiosPrivate.post('https://dry-bayou-12932.herokuapp.com/purchase', { address, orderQuantity, phone, displayName, email, id, name, pricePerUnit, paymentStatus: false })
             .then(res => res.data && navigate('/dashboard/myorders'))
             .catch(err => {
                 err.request.status === 302 && toast.error('Order Already Exists For This Product') && navigate('/dashboard/myorders')

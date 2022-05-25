@@ -6,7 +6,7 @@ import Loading from '../../SharedComponents/Loading'
 import Navbar from '../../SharedComponents/Navbar'
 
 export default function Products() {
-    const { isLoading, data: products } = useQuery("products", () => axios.get('http://localhost/products').then(res => res.data))
+    const { isLoading, data: products } = useQuery("products", () => axios.get('https://dry-bayou-12932.herokuapp.com/products').then(res => res.data))
 
     return (
         <>

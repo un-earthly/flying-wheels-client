@@ -22,7 +22,7 @@ export default function BusinessSummary() {
   ]
   return (
     <div className='my-36 relative'>
-      <h1 className="text-5xl font-bold text-center my-10 animate-pulse duration-500 absolute -top-16 text-gray-200 -z-10 right-4">Buisness Summery</h1>
+      <h1 className="text-5xl font-bold text-center my-10 animate-pulse duration-500 absolute -top-24 lg:-top-16 text-gray-200 -z-10 right-4">Buisness Summery</h1>
       <div className='bg-gradient-to-b to-[#3b2667] from-[#bc78ecab] text-white'>
         <div className="flex lg:flex-row w-full items-center justify-between p-16 flex-col lg:space-y-0 space-y-20">
           {

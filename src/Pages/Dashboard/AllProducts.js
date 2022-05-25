@@ -5,12 +5,12 @@ import useProducts from '../../Hooks/useProducts'
 import Loading from '../../SharedComponents/Loading'
 import axiosPrivate from '../../api/axiosPrivate'
 export default function AllProducts() {
-  const { isLoading, products,refetch } = useProducts()
+  const { isLoading, products, refetch } = useProducts()
   if (isLoading) {
     return <Loading></Loading>
   }
   const deleteProduct = id => {
-    axiosPrivate.delete('http://localhost/product/' + id)
+    axiosPrivate.delete('https://dry-bayou-12932.herokuapp.com/product/' + id)
       .then(res => refetch())
   }
   return (

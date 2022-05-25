@@ -17,7 +17,7 @@ export default function MyProfile() {
   }, [refetch])
 
   const onSubmit = data => {
-    axiosPrivate.put('http://localhost/updateProfile', data)
+    axiosPrivate.put('https://dry-bayou-12932.herokuapp.com/updateProfile', data)
       .then(res => {
         setupdateProfile(false)
         refetch()

@@ -5,7 +5,7 @@ import axiosPrivate from "../api/axiosPrivate"
 import auth from "../firebase.init"
 export default function useUser() {
     const [currentuser] = useAuthState(auth)
-    const { isLoading, data: user, refetch } = useQuery(["userProfile", currentuser], () => axiosPrivate.get(`http://localhost/user`).then(res => res.data))
+    const { isLoading, data: user, refetch } = useQuery(["userProfile", currentuser], () => axiosPrivate.get(`https://dry-bayou-12932.herokuapp.com/user`).then(res => res.data))
 
     useEffect(() => {
         refetch()
