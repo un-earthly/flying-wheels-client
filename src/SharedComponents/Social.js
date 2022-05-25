@@ -11,11 +11,11 @@ export default function Social() {
     const from = location.state?.from?.pathname
     if (user) {
         const email = user.user.email
-        axios.post('https://dry-bayou-12932.herokuapp.com/login', { email })
+        axios.post('http://localhost/login', { email })
             .then(res => localStorage.setItem('token', res.data.token))
-        axios.put('https://dry-bayou-12932.herokuapp.com/user', { email: user.user.email, name: user.user.displayName })
+        axios.put('http://localhost/user', { email: user.user.email, name: user.user.displayName })
 
-        navigate(from || '/', { replace: true })
+    navigate(from || '/', { replace: true })
     }
     if (loading) {
         return <p>Please Select your google account...</p>

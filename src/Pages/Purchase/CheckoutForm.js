@@ -6,7 +6,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 
 export default function CheckOutForm({ product, payAbleAmount: price }) {
-    console.log(price)
     const { address, displayName, phone, email } = product
     const navigate = useNavigate()
     const { id } = useParams()
@@ -15,7 +14,7 @@ export default function CheckOutForm({ product, payAbleAmount: price }) {
     const [err, setErr] = useState('')
     const [clientSecret, setClientSecret] = useState('')
     useEffect(() => {
-        axiosPrivate.post('https://dry-bayou-12932.herokuapp.com/create-payment-intent', { price })
+        axiosPrivate.post('http://localhost/create-payment-intent', { price })
             .then(res => setClientSecret(res.data?.clientSecret))
     }, [price])
 
@@ -57,11 +56,10 @@ export default function CheckOutForm({ product, payAbleAmount: price }) {
                 },
             },
         );
-        console.log(confirmError, paymentIntent)
         confirmError ? toast.error(confirmError)
             : toast.success(`payment successful with transaction id ${paymentIntent?.id}`)
 
-        paymentIntent && axiosPrivate.patch(`https://dry-bayou-12932.herokuapp.com/pay/${id}`, { transactionId: paymentIntent.id, paymentStatus: true })
+        paymentIntent && axiosPrivate.patch(`http://localhost/pay/${id}`, { transactionId: paymentIntent.id, paymentStatus: true })
             .then(res => navigate('/dashboard/myorders'))
 
 

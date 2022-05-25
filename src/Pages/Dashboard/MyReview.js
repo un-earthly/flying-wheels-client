@@ -15,9 +15,9 @@ export default function MyReview() {
   const onSubmit = data => {
     const { review, ratings } = data
     const { displayName: name, photoURL: img } = user
-    axiosPrivate.post('https://dry-bayou-12932.herokuapp.com/review', { review, name, img, ratings })
+    axiosPrivate.post('http://localhost/review', { review, name, img, ratings })
   }
-  const { data: myReview, refetch } = useQuery("myReview", () => axiosPrivate.get('https://dry-bayou-12932.herokuapp.com/review/byUser')
+  const { data: myReview, refetch } = useQuery("myReview", () => axiosPrivate.get('http://localhost/review/byUser')
     .then(res => {
       setLoadin(false)
       refetch()

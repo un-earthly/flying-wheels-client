@@ -7,7 +7,7 @@ import Loading from '../../SharedComponents/Loading';
 
 export default function HomeProduction() {
 
-  const { isLoading, data: products } = useQuery("products", () => axios.get('https://dry-bayou-12932.herokuapp.com/products').then(res => res.data))
+  const { isLoading, data: products } = useQuery("products", () => axios.get('http://localhost/products').then(res => res.data))
   return (
     <div className='my-20 relative'>
       <img src="https://manufacturer.stylemixthemes.com/industrial/wp-content/uploads/sites/2/2018/08/dots.png" className='absolute animate-bounce -top-40' alt="" />

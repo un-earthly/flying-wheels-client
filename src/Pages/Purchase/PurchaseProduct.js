@@ -1,32 +1,35 @@
 import axiosPrivate from '../../api/axiosPrivate'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import Loading from '../../SharedComponents/Loading'
 import { useQuery } from 'react-query'
 import { useForm } from 'react-hook-form'
-import { useAuthState } from 'react-firebase-hooks/auth'
-import auth from '../../firebase.init'
-import axios from 'axios'
 import { toast } from 'react-toastify'
 import Helmet from 'react-helmet'
+import useUser from '../../Hooks/useUser'
 
 export default function PurchaseProduct() {
     const { id } = useParams()
     const navigate = useNavigate()
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const [user] = useAuthState(auth)
-    const { isLoading, data: product } = useQuery("product", async () => {
-        const { data } = await axiosPrivate.get(`https://dry-bayou-12932.herokuapp.com/products/${id}`)
+    const { user, isLoading: userLoading } = useUser()
+
+    const { isLoading, data: product } = useQuery(["product", user], async () => {
+        const { data } = await axiosPrivate.get(`http://localhost/products/${id}`)
         return data
     })
-    if (isLoading) {
+    useEffect(() => {
+        user.admin && navigate('/dashboard')
+
+    })
+    if (isLoading || userLoading) {
         return <Loading />
     }
-    const { displayName, email } = user
+    const { name: displayName, email } = user
     const { img, name, desc, minOrdQty, availableQty, pricePerUnit } = product
     const onSubmit = data => {
         const { address, orderQuantity, phone } = data
-        axios.post('https://dry-bayou-12932.herokuapp.com/purchase', { address, orderQuantity, phone, displayName, email, id, name, pricePerUnit, paymentStatus: false })
+        axiosPrivate.post('http://localhost/purchase', { address, orderQuantity, phone, displayName, email, id, name, pricePerUnit, paymentStatus: false })
             .then(res => res.data && navigate('/dashboard/myorders'))
             .catch(err => {
                 err.request.status === 302 && toast.error('Order Already Exists For This Product') && navigate('/dashboard/myorders')

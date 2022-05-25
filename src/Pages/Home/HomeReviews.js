@@ -6,7 +6,7 @@ import Loading from '../../SharedComponents/Loading'
 import { Carousel } from 'react-responsive-carousel'
 
 export default function HomeReviews() {
-  const { isLoading, data: reviews } = useQuery("review", () => axios.get('https://dry-bayou-12932.herokuapp.com/review').then(res => res.data))
+  const { isLoading, data: reviews } = useQuery("review", () => axios.get('http://localhost/review').then(res => res.data))
   if (isLoading) {
     return <Loading />
   }
@@ -16,7 +16,7 @@ export default function HomeReviews() {
       <p className="text-5xl absolute text-gray-200 mt-10 text-center font-bold animate-pulse duration-500">Testimonials</p>
       <div className="grid grid-cols-1 gap-6 px-6">
         <Carousel infiniteLoop showStatus={false} showThumbs={false} autoPlay>
-          {reviews.map(r => <ReviewCard userReview={r} key={r._id} />)}
+          {reviews.slice(0, 10).reverse().map(r => <ReviewCard userReview={r} key={r._id} />)}
 
         </Carousel>
       </div>

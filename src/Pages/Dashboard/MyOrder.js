@@ -1,18 +1,26 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Helmet from 'react-helmet'
 import { useQuery } from 'react-query'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import axiosPrivate from '../../api/axiosPrivate'
+import useUser from '../../Hooks/useUser'
+import Loading from '../../SharedComponents/Loading'
 
 export default function MyOrder() {
-  const { data: orders, isLoading, refetch } = useQuery("orders", () => axiosPrivate.get('https://dry-bayou-12932.herokuapp.com/orders').then(res => res.data))
+  const { data: orders, isLoading, refetch } = useQuery(["orders"], () => axiosPrivate.get('http://localhost/orders').then(res => res.data))
   const [id, setId] = useState('')
-  if (isLoading) {
-    return toast.warn('Please Wait')
+  const navigate = useNavigate()
+  const { user, isLoading: userLoading } = useUser()
+  useEffect(() => {
+    user?.admin && navigate('/dashboard')
+    refetch()
+  }, [orders, refetch, user, navigate])
+  if (isLoading || userLoading) {
+    return <Loading />
   }
   const deleteOrder = () => {
-    axiosPrivate.delete('https://dry-bayou-12932.herokuapp.com/orders/' + id).then(res => {
+    axiosPrivate.delete('http://localhost/orders/' + id).then(res => {
       toast.success('Deleted Successfull')
       refetch()
     })
@@ -30,8 +38,8 @@ export default function MyOrder() {
       <div className="modal modal-bottom sm:modal-middle">
         <div className="modal-box">
           <p>Do You Want To Delete?</p>
-          <label for="deleteModal" onClick={deleteOrder} className="btn btn-success">Yes</label>
-          <label for="deleteModal" className="btn btn-error" >No</label>
+          <label htmlFor="deleteModal" onClick={deleteOrder} className="btn btn-success">Yes</label>
+          <label htmlFor="deleteModal" className="btn btn-error" >No</label>
         </div>
       </div>
       <div className="overflow-x-auto">
@@ -50,9 +58,9 @@ export default function MyOrder() {
               <tr key={o._id}>
                 <th>{i + 1}</th>
                 <td>{o.name}</td>
-                <td>{o.paymentStatus ? <p className="text-success">Paid</p> : <Link to={`/pay/${o._id}`} className="btn btn-success">Pay Now</Link>}</td>
+                <td>{o.paymentStatus ? <p className="text-success">Paid <span className="block"> {o.transactionId}</span></p> : <Link to={`/pay/${o._id}`} className="btn btn-success">Pay Now</Link>}</td>
                 <td>{o.shippedStatus || 'Pending'}</td>
-                <td>{!o.paymentStatus ? <label for="deleteModal" onClick={() => setId(o._id)}><i className="bi bi-x bg-error rounded-full text-2xl px-1"></i></label> : <span className="text-error">Order Cant Be Canceled</span>}</td>
+                <td>{!o.paymentStatus ? <label htmlFor="deleteModal" onClick={() => setId(o._id)}><i className="bi bi-x bg-error rounded-full text-2xl px-1"></i></label> : <span className="text-error">Order Cant Be Canceled</span>}</td>
               </tr>
             ))}
           </tbody>
