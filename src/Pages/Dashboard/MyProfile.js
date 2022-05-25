@@ -3,7 +3,6 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 import Helmet from 'react-helmet'
 import { useForm } from 'react-hook-form'
 import { useQuery } from 'react-query'
-import { toast } from 'react-toastify'
 import axiosPrivate from '../../api/axiosPrivate'
 import auth from '../../firebase.init'
 import Loading from '../../SharedComponents/Loading'
@@ -11,14 +10,14 @@ export default function MyProfile() {
   const [query, loading] = useAuthState(auth);
   const [updateProfile, setupdateProfile] = useState(false)
   const { register, handleSubmit, formState: { errors }, reset } = useForm()
-  const { isLoading, data: user, refetch } = useQuery("userProfile", () => axiosPrivate.get(`http://localhost/user`).then(res => res.data))
+  const { isLoading, data: user, refetch } = useQuery("userProfile", () => axiosPrivate.get(`https://dry-bayou-12932.herokuapp.com/user`).then(res => res.data))
 
   useEffect(() => {
     refetch()
   }, [user, refetch])
 
   const onSubmit = data => {
-    axiosPrivate.put('http://localhost/updateProfile', data)
+    axiosPrivate.put('https://dry-bayou-12932.herokuapp.com/updateProfile', data)
       .then(res => {
         setupdateProfile(false)
         refetch()

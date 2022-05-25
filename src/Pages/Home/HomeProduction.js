@@ -21,8 +21,9 @@ export default function HomeProduction() {
             : products.slice(0, 3).map(p => <Card key={p._id} product={p} />)
         }
       </div>
-      <button className='animate-pulse uppercase duration-500 hover:border-black hover:text-black mx-auto block text-white border py-3 hover:bg-transparent rounded-full bg-black px-12 mt-5'> Show
+      <Link to='/products'> <button className='animate-pulse uppercase duration-500 hover:border-black hover:text-black mx-auto block text-white border py-3 hover:bg-transparent rounded-full bg-black px-12 mt-5'> Show
         More <i className="bi bi-arrow-right"></i></button>
+      </Link>
 
     </div>
   )

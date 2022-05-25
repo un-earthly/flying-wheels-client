@@ -2,17 +2,20 @@ import React, { useState } from 'react'
 import Helmet from 'react-helmet'
 import { useQuery } from 'react-query'
 import { Link } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import axiosPrivate from '../../api/axiosPrivate'
-import Loading from '../../SharedComponents/Loading'
 
 export default function MyOrder() {
-  const { data: orders, isLoading } = useQuery("orders", () => axiosPrivate.get('http://localhost/orders').then(res => res.data))
+  const { data: orders, isLoading, refetch } = useQuery("orders", () => axiosPrivate.get('https://dry-bayou-12932.herokuapp.com/orders').then(res => res.data))
   const [id, setId] = useState('')
   if (isLoading) {
-    return <Loading />
+    return toast.warn('Please Wait')
   }
   const deleteOrder = () => {
-    axiosPrivate.delete('http://localhost/orders/' + id)
+    axiosPrivate.delete('https://dry-bayou-12932.herokuapp.com/orders/' + id).then(res => {
+      toast.success('Deleted Successfull')
+      refetch()
+    })
   }
 
   return (
@@ -45,10 +48,9 @@ export default function MyOrder() {
           <tbody>
             {orders.map((o, i) => (
               <tr key={o._id}>
-                {console.log(o.paymentStatus)}
                 <th>{i + 1}</th>
                 <td>{o.name}</td>
-                <td>{o.paymentStatus ? <p className="text-success">Paid</p> : <Link to='/pay' className="btn btn-success">Pay Now</Link>}</td>
+                <td>{o.paymentStatus ? <p className="text-success">Paid</p> : <Link to={`/pay/${o._id}`} className="btn btn-success">Pay Now</Link>}</td>
                 <td>{o.shippedStatus || 'Pending'}</td>
                 <td>{!o.paymentStatus ? <label for="deleteModal" onClick={() => setId(o._id)}><i className="bi bi-x bg-error rounded-full text-2xl px-1"></i></label> : <span className="text-error">Order Cant Be Canceled</span>}</td>
               </tr>
@@ -56,6 +58,7 @@ export default function MyOrder() {
           </tbody>
         </table>
       </div>
+      <Link to='/products' className='btn flex items-center justify-center hover:bg-transparent hover:text-black mt-10'>Add More <i className="bi bi-plus text-lg"></i></Link>
     </div>
   )
 }

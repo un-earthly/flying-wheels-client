@@ -6,7 +6,7 @@ import Loading from '../../SharedComponents/Loading'
 import { Carousel } from 'react-responsive-carousel'
 
 export default function HomeReviews() {
-  const { isLoading, data: reviews } = useQuery("review", () => axios.get('http://localhost/review').then(res => res.data))
+  const { isLoading, data: reviews } = useQuery("review", () => axios.get('https://dry-bayou-12932.herokuapp.com/review').then(res => res.data))
   if (isLoading) {
     return <Loading />
   }

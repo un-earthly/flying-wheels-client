@@ -22,6 +22,7 @@ import AllProducts from "./Pages/Dashboard/AllProducts";
 import AddProducts from "./Pages/Dashboard/AddProducts";
 import AllOrders from "./Pages/Dashboard/AllOrders";
 import Pay from "./Pages/Purchase/Pay";
+import Products from "./Pages/Products/Products";
 
 function App() {
   const [loadin, setLoadin] = useState(true)
@@ -39,8 +40,9 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/portfolio' element={<MyPortfolio />} />
+        <Route path='/products' element={<RequireAuth><Products /></RequireAuth>} />
         <Route path='/purchase/:id' element={<RequireAuth><PurchaseProduct /></RequireAuth>} />
-        <Route path='/pay' element={<RequireAuth><Pay /></RequireAuth>} />
+        <Route path='/pay/:id' element={<RequireAuth><Pay /></RequireAuth>} />
         <Route path='/dashboard' element={<RequireAuth><Dashboard /></RequireAuth>}>
           <Route index element={<MyProfile />} />
           <Route index path='myprofile' element={<MyProfile />} />

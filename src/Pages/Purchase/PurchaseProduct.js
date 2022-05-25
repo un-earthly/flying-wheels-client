@@ -16,7 +16,7 @@ export default function PurchaseProduct() {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [user] = useAuthState(auth)
     const { isLoading, data: product } = useQuery("product", async () => {
-        const { data } = await axiosPrivate.get(`http://localhost/products/${id}`)
+        const { data } = await axiosPrivate.get(`https://dry-bayou-12932.herokuapp.com/products/${id}`)
         return data
     })
     if (isLoading) {
@@ -26,7 +26,7 @@ export default function PurchaseProduct() {
     const { img, name, desc, minOrdQty, availableQty, pricePerUnit } = product
     const onSubmit = data => {
         const { address, orderQuantity, phone } = data
-        axios.post('http://localhost/purchase', { address, orderQuantity, phone, displayName, email, id, name, paymentStatus: false })
+        axios.post('https://dry-bayou-12932.herokuapp.com/purchase', { address, orderQuantity, phone, displayName, email, id, name, pricePerUnit, paymentStatus: false })
             .then(res => res.data && navigate('/dashboard/myorders'))
             .catch(err => {
                 err.request.status === 302 && toast.error('Order Already Exists For This Product') && navigate('/dashboard/myorders')
@@ -36,7 +36,7 @@ export default function PurchaseProduct() {
     return (
         <div className="grid grid-cols-1 lg:grid-cols-3 h-screen">
             <Helmet>
-                <title>Order Product {id}-Fly Wheels</title>
+                <title>Buy {name} - Fly Wheels</title>
             </Helmet>
             <div className="bg-base-100 p-5">
                 <form className='space-y-10' onSubmit={handleSubmit(onSubmit)}>
@@ -77,7 +77,7 @@ export default function PurchaseProduct() {
                             type='number' {...register("orderQuantity", { required: true, min: { value: minOrdQty, message: `you cant order less than minimum order quantity` }, valueAsNumber: true, max: { value: availableQty, message: `you cant order more than available quantity` } })} />
                         {errors.orderQuantity && <span className="text-error capitalize">{errors?.orderQuantity.message}</span>}
                     </label>
-                    <button className="btn w-full duration-500 hover:bg-transparent hover:text-black my-6">Proceed To Pay</button>
+                    <button className="btn w-full duration-500 hover:bg-transparent hover:text-black my-6">Proceed</button>
 
                 </form>
 
