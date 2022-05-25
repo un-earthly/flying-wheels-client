@@ -4,10 +4,10 @@ import { useForm } from 'react-hook-form'
 import axiosPrivate from '../../api/axiosPrivate'
 
 export default function AddProducts() {
-  const { formState: { errors }, register, handleSubmit } = useForm()
+  const { formState: { errors }, register, handleSubmit, reset } = useForm()
   const onSubmit = data => {
-    console.log(data)
-    axiosPrivate.post('http://localhost/product')
+    axiosPrivate.post('http://localhost/product', data)
+      .then(res => reset())
   }
   return (
     <div>

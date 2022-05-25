@@ -5,13 +5,13 @@ import useProducts from '../../Hooks/useProducts'
 import Loading from '../../SharedComponents/Loading'
 import axiosPrivate from '../../api/axiosPrivate'
 export default function AllProducts() {
-  const { isLoading, products } = useProducts()
+  const { isLoading, products,refetch } = useProducts()
   if (isLoading) {
     return <Loading></Loading>
   }
   const deleteProduct = id => {
     axiosPrivate.delete('http://localhost/product/' + id)
-      .then(res => console.log(res))
+      .then(res => refetch())
   }
   return (
     <div>

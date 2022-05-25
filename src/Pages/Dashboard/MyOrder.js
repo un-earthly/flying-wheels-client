@@ -8,7 +8,7 @@ import useUser from '../../Hooks/useUser'
 import Loading from '../../SharedComponents/Loading'
 
 export default function MyOrder() {
-  const { data: orders, isLoading, refetch } = useQuery(["orders"], () => axiosPrivate.get('http://localhost/orders').then(res => res.data))
+  const { data: orders, isLoading, refetch } = useQuery(["orders"], () => axiosPrivate.get('http://localhost/myorders').then(res => res.data))
   const [id, setId] = useState('')
   const navigate = useNavigate()
   const { user, isLoading: userLoading } = useUser()

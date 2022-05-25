@@ -3,7 +3,7 @@ import { useQuery } from "react-query"
 
 
 export default function useProducts() {
-    const { isLoading, data: products } = useQuery("products", () => axios.get('http://localhost/products').then(res => res.data))
+    const { isLoading, data: products, refetch } = useQuery("products", () => axios.get('http://localhost/products').then(res => res.data))
 
-    return { isLoading, products }
+    return { isLoading, products, refetch }
 }

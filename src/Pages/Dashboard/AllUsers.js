@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useEffect } from 'react'
+import React from 'react'
 import Helmet from 'react-helmet'
 import { useQuery } from 'react-query'
 import axiosPrivate from '../../api/axiosPrivate'
@@ -14,7 +14,6 @@ export default function AllUsers() {
     const makeAdmin = id => {
         axiosPrivate.patch('http://localhost/makeadmin', { id })
             .then(res => {
-                console.log(res)
                 refetch()
             })
     }
