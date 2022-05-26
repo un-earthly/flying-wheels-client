@@ -11,7 +11,7 @@ export default function ReviewCard({ userReview }) {
             </div>
 
             <div className="mt-2 text-2xl font-semibold text-gray-800 md:mt-0 md:text-3xl flex items-center justify-between">
-                <span>{[...Array(ratings).keys()].map((i, index) => <i key={index} className="bi bi-star-fill text-[#FFAC0C]"></i>)}</span>
+                <span>{[...Array(ratings).keys()].map((i, index) => <i key={index} className={`bi bi-star-fill `}></i>)}</span>
                 <span>{ratings}/5</span>
             </div>
 

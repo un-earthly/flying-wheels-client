@@ -1,8 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import Helmet from 'react-helmet'
 import { useForm } from 'react-hook-form'
-import { useQuery } from 'react-query'
 import axiosPrivate from '../../api/axiosPrivate'
 import auth from '../../firebase.init'
 import Loading from '../../SharedComponents/Loading'
@@ -17,12 +16,14 @@ export default function MyReview() {
     const { displayName: name, photoURL: img } = user
     axiosPrivate.post('https://dry-bayou-12932.herokuapp.com/review', { review, name, img, ratings })
   }
-  const { data: myReview, refetch } = useQuery("myReview", () => axiosPrivate.get('https://dry-bayou-12932.herokuapp.com/review/byUser')
-    .then(res => {
-      setLoadin(false)
-      refetch()
-      return res.data
-    }))
+  const [myReview, setMyReview] = useState({})
+  useEffect(() => {
+    axiosPrivate.get('https://dry-bayou-12932.herokuapp.com/review/byUser')
+      .then(res => {
+        setLoadin(false)
+        setMyReview(res.data)
+      })
+  })
 
   if (loading || loadin) {
     return <Loading />

@@ -20,16 +20,16 @@ export default function Pay() {
     const payAbleAmount = (orderQuantity * pricePerUnit)
     return (
         <div>
-            <div class="hero min-h-screen ">
-                <div class="hero-content flex-col lg:flex-row w-3/4">
-                    <div class="text-center lg:text-left shadow-lg p-5 flex-grow">
-                        <h1 class="text-lg font-bold">Hello {displayName}</h1>
-                        <p class="py-3 text-xl capitalize">You Have ordered {orderQuantity} pcs {name}.</p>
-                        <p class="text-lg text-info capitalize">Please Pay ${payAbleAmount.toLocaleString()}</p>
+            <div className="hero min-h-screen ">
+                <div className="hero-content flex-col lg:flex-row w-3/4">
+                    <div className="text-center lg:text-left shadow-lg p-5 flex-grow">
+                        <h1 className="text-lg font-bold">Hello {displayName}</h1>
+                        <p className="py-3 text-xl capitalize">You Have ordered {orderQuantity} pcs {name}.</p>
+                        <p className="text-lg text-info capitalize">Please Pay ${payAbleAmount.toLocaleString()}</p>
 
                     </div>
-                    <div class="card w-full shadow-2xl bg-base-100 flex-grow">
-                        <div class="card-body">
+                    <div className="card w-full shadow-2xl bg-base-100 flex-grow">
+                        <div className="card-body">
                             <Elements stripe={stripePromise}>
                                 <CheckoutForm product={product} payAbleAmount={payAbleAmount} />
                             </Elements>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import Helmet from 'react-helmet'
 import { useForm } from 'react-hook-form'
@@ -10,17 +10,12 @@ export default function MyProfile() {
   const [query, loading] = useAuthState(auth);
   const [updateProfile, setupdateProfile] = useState(false)
   const { register, handleSubmit, formState: { errors }, reset } = useForm()
-  const { isLoading, user, refetch } = useUser()
-
-  useEffect(() => {
-    refetch()
-  }, [refetch])
+  const { isLoading, user } = useUser()
 
   const onSubmit = data => {
     axiosPrivate.put('https://dry-bayou-12932.herokuapp.com/updateProfile', data)
       .then(res => {
         setupdateProfile(false)
-        refetch()
         reset()
       })
   }

@@ -22,8 +22,8 @@ export default function AllProducts() {
         <h1 className="text-3xl font-bold p-5">All Users</h1>
       </div>
 
-      <div class="overflow-x-auto">
-        <table class="table w-full">
+      <div className="overflow-x-auto">
+        <table className="table w-full">
           <thead>
             <tr>
               <th></th>
