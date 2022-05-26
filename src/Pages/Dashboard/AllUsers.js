@@ -39,7 +39,7 @@ export default function AllUsers() {
                     <tbody>
                         {
                             user.map((u, i) => (
-                                <tr>
+                                <tr key={i}>
                                     <th>{i + 1}</th>
                                     <td>{u.name}</td>
                                     <td>{u.email}</td>

@@ -9,8 +9,8 @@ export default function useUser() {
     useEffect(() => {
         axiosPrivate.get(`https://dry-bayou-12932.herokuapp.com/user`)
             .then(res => {
-                setIsLoading(false)
                 setUser(res.data)
+                setIsLoading(false)
             })
     }, [currentuser])
     return { user, isLoading }
