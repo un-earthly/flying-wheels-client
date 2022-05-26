@@ -25,7 +25,7 @@ export default function Dashboard() {
                     <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
                     <ul className="menu p-4 overflow-y-auto w-80 bg-base-100 text-base-content">
                         <li><Link to='myprofile'>My Profile</Link></li>
-                        {user.admin ?
+                        {user.Admin ?
                             <>
                                 <li><Link to='allusers'>All Users</Link></li>
                                 <li><Link to='allproducts'>All Products</Link></li>

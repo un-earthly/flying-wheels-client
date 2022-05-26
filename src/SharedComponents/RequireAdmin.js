@@ -9,7 +9,7 @@ export default function RequireAdmin({ children }) {
 
   isLoading && <Loading />
 
-  if (user.admin) {
+  if (user.Admin) {
     return children
   }
   else {
