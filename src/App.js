@@ -17,7 +17,6 @@ import MyProfile from "./Pages/Dashboard/MyProfile";
 import MyReview from "./Pages/Dashboard/MyReview";
 import MyOrder from "./Pages/Dashboard/MyOrder";
 import AllUsers from "./Pages/Dashboard/AllUsers";
-import RequireAdmin from "./SharedComponents/RequireAdmin";
 import AllProducts from "./Pages/Dashboard/AllProducts";
 import AddProducts from "./Pages/Dashboard/AddProducts";
 import AllOrders from "./Pages/Dashboard/AllOrders";
@@ -48,10 +47,10 @@ function App() {
           <Route index path='myprofile' element={<MyProfile />} />
           <Route path='myorders' element={<MyOrder />} />
           <Route path='myreview' element={<MyReview />} />
-          <Route path='allusers' element={<RequireAdmin><AllUsers /></RequireAdmin>} />
-          <Route path='allproducts' element={<RequireAdmin><AllProducts /></RequireAdmin>} />
-          <Route path='addproduct' element={<RequireAdmin><AddProducts /></RequireAdmin>} />
-          <Route path='allorders' element={<RequireAdmin><AllOrders /></RequireAdmin>} />
+          <Route path='allusers' element={<AllUsers />} />
+          <Route path='allproducts' element={<AllProducts />} />
+          <Route path='addproduct' element={<AddProducts />} />
+          <Route path='allorders' element={<AllOrders />} />
         </Route>
         <Route path='/blogs' element={<Blogs />} />
         <Route path='/login' element={<Login />} />

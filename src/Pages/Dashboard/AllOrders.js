@@ -30,7 +30,7 @@ export default function AllOrders() {
         <title>All Orders - Flying Wheels</title>
       </Helmet>
       <div>
-        <h1 className="text-3xl font-bold p-5">Add Products</h1>
+        <h1 className="text-3xl font-bold p-5">All Orders</h1>
       </div>
       <input type="checkbox" id="deleteModal" className="modal-toggle" />
       <div className="modal modal-bottom sm:modal-middle">
