@@ -4,15 +4,17 @@ import Helmet from 'react-helmet'
 import { useQuery } from 'react-query'
 import axiosPrivate from '../../api/axiosPrivate'
 import Loading from '../../SharedComponents/Loading'
+import { GET_ALL_USERS_URL, MAKE_ADMIN_URL } from '../../urls'
 
 export default function AllUsers() {
-    const { data: user, isLoading, refetch } = useQuery("alluser", () => axios.get('https://dry-bayou-12932.herokuapp.com/alluser').then(res => res.data))
+    const { data: user, isLoading, refetch } = useQuery("alluser",
+        () => axios.get(GET_ALL_USERS_URL).then(res => res.data))
 
     if (isLoading) {
         return <Loading></Loading>
     }
     const makeAdmin = id => {
-        axiosPrivate.patch('https://dry-bayou-12932.herokuapp.com/makeadmin', { id })
+        axiosPrivate.patch(MAKE_ADMIN_URL, { id })
             .then(res => {
                 refetch()
             })

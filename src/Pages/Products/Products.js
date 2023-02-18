@@ -4,9 +4,13 @@ import { useQuery } from 'react-query'
 import Card from '../../SharedComponents/Card'
 import Loading from '../../SharedComponents/Loading'
 import Navbar from '../../SharedComponents/Navbar'
+import { GET_ALL_PRODUCTS_URL } from '../../urls'
 
 export default function Products() {
-    const { isLoading, data: products } = useQuery("products", () => axios.get('https://dry-bayou-12932.herokuapp.com/products').then(res => res.data))
+    const { isLoading, data: products } = useQuery("products", () => axios.get(GET_ALL_PRODUCTS_URL)
+        .then(res => res.data)
+        .catch(err => console.log(err))
+    )
 
     return (
         <>

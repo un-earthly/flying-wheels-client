@@ -6,11 +6,12 @@ import Loading from '../../SharedComponents/Loading'
 import CheckoutForm from './CheckoutForm'
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
+import { PAY_FOR_PRODUCT_URL } from '../../urls'
 const stripePromise = loadStripe('pk_test_51L341gHnKmDPsoOitaN1VU4A1hMOWNLHbLdmsPNgMUVvaf6kKBi3kbGwFKYp2eQW0JYvrA4OBB9FYYcIoF766jWE00KquO9Iji');
 export default function Pay() {
     const { id } = useParams()
     const { isLoading, data: product } = useQuery("product", async () => {
-        const { data } = await axiosPrivate.get(`https://dry-bayou-12932.herokuapp.com/pay/${id}`)
+        const { data } = await axiosPrivate.get(PAY_FOR_PRODUCT_URL + id)
         return data
     })
     if (isLoading) {

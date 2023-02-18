@@ -4,19 +4,21 @@ import { toast } from 'react-toastify'
 import axiosPrivate from '../../api/axiosPrivate'
 import useOrders from '../../Hooks/useOrders'
 import Loading from '../../SharedComponents/Loading'
+import { UPDATED_SHIPPED_STATUS_URL, DELETE_ORDER_URL } from '../../urls'
 
 export default function AllOrders() {
   const { isLoading, orders, refetch } = useOrders()
   const [id, setId] = useState('')
   const updateShipped = id => {
 
-    axiosPrivate.patch('https://dry-bayou-12932.herokuapp.com/orders', { id })
+    axiosPrivate.patch(UPDATED_SHIPPED_STATUS_URL + id)
       .then(res => {
+        toast.success("shipped successfully")
         refetch()
       })
   }
   const deleteOrder = () => {
-    axiosPrivate.delete('https://dry-bayou-12932.herokuapp.com/orders/' + id).then(res => {
+    axiosPrivate.delete(DELETE_ORDER_URL + id).then(() => {
       toast.success('Deleted Successfull')
       refetch()
     })
@@ -54,7 +56,7 @@ export default function AllOrders() {
           <tbody>
             {
               orders.map((o, i) => (
-                <tr>
+                <tr key={i}>
                   <th>{i + 1}</th>
                   <td>{o.name}</td>
                   <td>{o.paymentStatus ? <span className="text-success">Paid <span className="block">{o.transactionId}</span></span> : <span className="text-error">Not Paid</span>}</td>

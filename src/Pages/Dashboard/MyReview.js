@@ -6,6 +6,7 @@ import axiosPrivate from '../../api/axiosPrivate'
 import auth from '../../firebase.init'
 import Loading from '../../SharedComponents/Loading'
 import ReviewCard from '../../SharedComponents/ReviewCard'
+import { ADD_REVIEW_URL, GET_USER_REVIEW_URL } from '../../urls'
 
 export default function MyReview() {
   const { register, handleSubmit, formState: { errors } } = useForm()
@@ -14,15 +15,16 @@ export default function MyReview() {
   const onSubmit = data => {
     const { review, ratings } = data
     const { displayName: name, photoURL: img } = user
-    axiosPrivate.post('https://dry-bayou-12932.herokuapp.com/review', { review, name, img, ratings })
+    axiosPrivate.post(ADD_REVIEW_URL, { review, name, img, ratings })
   }
   const [myReview, setMyReview] = useState({})
   useEffect(() => {
-    axiosPrivate.get('https://dry-bayou-12932.herokuapp.com/review/byUser')
+    axiosPrivate.get(GET_USER_REVIEW_URL)
       .then(res => {
         setLoadin(false)
         setMyReview(res.data)
       })
+      .catch(err => console.log(err))
   })
 
   if (loading || loadin) {

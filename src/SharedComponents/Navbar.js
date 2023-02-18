@@ -12,8 +12,6 @@ export default function Navbar() {
   }
   const menuLinks = <>
     <NavLink className="text-gray-300 duration-500 hover:text-white" to='/'>Home</NavLink>
-    <NavLink className="text-gray-300 duration-500 hover:text-white" to='/blogs'>Blogs</NavLink>
-    <NavLink className="text-gray-300 duration-500 hover:text-white" to='/portfolio'>My Portfolio</NavLink>
 
     {user ?
       <>

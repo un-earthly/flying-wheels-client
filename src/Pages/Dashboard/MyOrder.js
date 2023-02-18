@@ -6,9 +6,12 @@ import { toast } from 'react-toastify'
 import axiosPrivate from '../../api/axiosPrivate'
 import useUser from '../../Hooks/useUser'
 import Loading from '../../SharedComponents/Loading'
+import { DELETE_ORDER_URL, GET_ORDERS_BY_EMAIL_URL } from '../../urls'
 
 export default function MyOrder() {
-  const { data: orders, isLoading, refetch } = useQuery(["orders"], () => axiosPrivate.get('https://dry-bayou-12932.herokuapp.com/myorders').then(res => res.data))
+  const { data: orders, isLoading, refetch } = useQuery(["orders"], () => axiosPrivate
+    .get(GET_ORDERS_BY_EMAIL_URL)
+    .then(res => res.data))
   const [id, setId] = useState('')
   const navigate = useNavigate()
   const { user, isLoading: userLoading } = useUser()
@@ -20,10 +23,11 @@ export default function MyOrder() {
     return <Loading />
   }
   const deleteOrder = () => {
-    axiosPrivate.delete('https://dry-bayou-12932.herokuapp.com/orders/' + id).then(res => {
-      toast.success('Deleted Successfull')
-      refetch()
-    })
+    axiosPrivate
+      .delete(DELETE_ORDER_URL + id).then(res => {
+        toast.success('Deleted Successfull')
+        refetch()
+      })
   }
 
   return (

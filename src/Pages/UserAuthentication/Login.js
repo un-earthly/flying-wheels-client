@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import auth from '../../firebase.init';
 import useShowPass from '../../Hooks/useShowPass';
 import Social from '../../SharedComponents/Social';
+import { LOGIN_URL, UPDATE_USER_URL } from '../../urls';
 export default function Login() {
     const navigate = useNavigate()
     const [sendPasswordResetEmail, resetLoading, resetError] = useSendPasswordResetEmail(auth);
@@ -14,7 +15,7 @@ export default function Login() {
     const [login, user, loading, error] = useSignInWithEmailAndPassword(auth)
     const email = watch(["email"]);
     const onSubmit = data => {
-        axios.post('https://dry-bayou-12932.herokuapp.com/login', { email: data.email })
+        axios.post(LOGIN_URL, { email: data.email })
             .then(res => localStorage.setItem('token', res.data.token))
         login(data.email, data.password)
     }
@@ -24,7 +25,7 @@ export default function Login() {
     const from = location.state?.from?.pathname
 
     if (user) {
-        axios.put('https://dry-bayou-12932.herokuapp.com/user', { email: user.user.email, name: user.user.displayName })
+        axios.put(UPDATE_USER_URL, { email: user.user.email, name: user.user.displayName })
         navigate(from || '/', { replace: true })
     }
     if (loading || resetLoading) {

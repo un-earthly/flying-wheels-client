@@ -4,9 +4,11 @@ import { useQuery } from 'react-query'
 import ReviewCard from '../../SharedComponents/ReviewCard'
 import Loading from '../../SharedComponents/Loading'
 import { Carousel } from 'react-responsive-carousel'
+import { GET_ALL_REVIEWS_URL } from '../../urls'
 
 export default function HomeReviews() {
-  const { isLoading, data: reviews } = useQuery("review", () => axios.get('https://dry-bayou-12932.herokuapp.com/review').then(res => res.data))
+  const { isLoading, data: reviews } = useQuery("review", () => axios
+    .get(GET_ALL_REVIEWS_URL).then(res => res.data))
   if (isLoading) {
     return <Loading />
   }

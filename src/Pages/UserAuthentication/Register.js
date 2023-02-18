@@ -7,6 +7,7 @@ import auth from '../../firebase.init';
 import useShowPass from '../../Hooks/useShowPass';
 import Loading from '../../SharedComponents/Loading';
 import Social from '../../SharedComponents/Social';
+import { LOGIN_URL, UPDATE_USER_URL } from '../../urls';
 
 export default function Register() {
     const navigate = useNavigate()
@@ -14,7 +15,7 @@ export default function Register() {
     const [createUser, user, loading, error] = useCreateUserWithEmailAndPassword(auth)
     const [updateProfile, updating, updaingFailed] = useUpdateProfile(auth)
     const onSubmit = async (data) => {
-        axios.post('https://dry-bayou-12932.herokuapp.com/login', { email: data.email })
+        axios.post(LOGIN_URL, { email: data.email })
             .then(res => localStorage.setItem('token', res.data.token))
         await createUser(data.email, data.password)
         await updateProfile({ displayName: data.name, photoURL: data.img })
@@ -27,7 +28,12 @@ export default function Register() {
     }
     if (user) {
         if (user.user.displayName) {
-            axios.put('https://dry-bayou-12932.herokuapp.com/user', { email: user.user.email, name: user.user.displayName, photoURL: user.user.photoURL })
+            axios.put(UPDATE_USER_URL
+                , {
+                    email: user.user.email,
+                    name: user.user.displayName,
+                    photoURL: user.user.photoURL
+                })
         }
         navigate(from || '/', { replace: true })
     }

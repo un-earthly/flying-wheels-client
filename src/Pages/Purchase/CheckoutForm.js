@@ -3,6 +3,7 @@ import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import axiosPrivate from '../../api/axiosPrivate';
 import { toast } from 'react-toastify';
 import { useNavigate, useParams } from 'react-router-dom';
+import { CREATE_PAYMENT_INTENT_URL, PAY_FOR_PRODUCT_URL } from '../../urls';
 
 
 export default function CheckOutForm({ product, payAbleAmount: price }) {
@@ -14,7 +15,8 @@ export default function CheckOutForm({ product, payAbleAmount: price }) {
     const [err, setErr] = useState('')
     const [clientSecret, setClientSecret] = useState('')
     useEffect(() => {
-        axiosPrivate.post('https://dry-bayou-12932.herokuapp.com/create-payment-intent', { price })
+        axiosPrivate
+            .post(CREATE_PAYMENT_INTENT_URL, { price })
             .then(res => setClientSecret(res.data?.clientSecret))
     }, [price])
 
@@ -59,8 +61,13 @@ export default function CheckOutForm({ product, payAbleAmount: price }) {
         confirmError ? toast.error(confirmError)
             : toast.success(`payment successful with transaction id ${paymentIntent?.id}`)
 
-        paymentIntent && axiosPrivate.patch(`https://dry-bayou-12932.herokuapp.com/pay/${id}`, { transactionId: paymentIntent.id, paymentStatus: true })
-            .then(res => navigate('/dashboard/myorders'))
+        paymentIntent && axiosPrivate
+            .patch(PAY_FOR_PRODUCT_URL + id,
+                {
+                    transactionId: paymentIntent.id,
+                    paymentStatus: true
+                })
+            .then(() => navigate('/dashboard/myorders'))
 
 
     }

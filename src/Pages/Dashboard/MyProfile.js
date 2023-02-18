@@ -6,6 +6,7 @@ import axiosPrivate from '../../api/axiosPrivate'
 import auth from '../../firebase.init'
 import useUser from '../../Hooks/useUser'
 import Loading from '../../SharedComponents/Loading'
+import { UPDDATE_PROFILE_URL } from '../../urls'
 export default function MyProfile() {
   const [query, loading] = useAuthState(auth);
   const [updateProfile, setupdateProfile] = useState(false)
@@ -13,7 +14,7 @@ export default function MyProfile() {
   const { isLoading, user } = useUser()
 
   const onSubmit = data => {
-    axiosPrivate.put('https://dry-bayou-12932.herokuapp.com/updateProfile', data)
+    axiosPrivate.put(UPDDATE_PROFILE_URL, data)
       .then(res => {
         setupdateProfile(false)
         reset()

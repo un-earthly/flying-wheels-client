@@ -7,15 +7,18 @@ import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import Helmet from 'react-helmet'
 import useUser from '../../Hooks/useUser'
+import { GET_SINGLE_PRODUCT_URL, PURCHASE_PRODUCT_URL } from '../../urls'
 
 export default function PurchaseProduct() {
     const { id } = useParams()
     const navigate = useNavigate()
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const { user, isLoading: userLoading } = useUser()
+    const { user,
+        isLoading: userLoading
+    } = useUser()
 
     const { isLoading, data: product } = useQuery(["product", user], async () => {
-        const { data } = await axiosPrivate.get(`https://dry-bayou-12932.herokuapp.com/products/${id}`)
+        const { data } = await axiosPrivate.get(GET_SINGLE_PRODUCT_URL + id)
         return data
     })
     useEffect(() => {
@@ -29,7 +32,18 @@ export default function PurchaseProduct() {
     const { img, name, desc, minOrdQty, availableQty, pricePerUnit } = product
     const onSubmit = data => {
         const { address, orderQuantity, phone } = data
-        axiosPrivate.post('https://dry-bayou-12932.herokuapp.com/purchase', { address, orderQuantity, phone, displayName, email, id, name, pricePerUnit, paymentStatus: false })
+        axiosPrivate.post(PURCHASE_PRODUCT_URL,
+            {
+                address,
+                orderQuantity,
+                phone,
+                displayName,
+                email,
+                id,
+                name,
+                pricePerUnit,
+                paymentStatus: false
+            })
             .then(res => res.data && navigate('/dashboard/myorders'))
             .catch(err => {
                 err.request.status === 302 && toast.error('Order Already Exists For This Product') && navigate('/dashboard/myorders')
@@ -68,7 +82,13 @@ export default function PurchaseProduct() {
                         <input
                             className="appearance-none border-b focus:border-success outline-none duration-300 w-full py-2 md:text-xl px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             id="phone"
-                            type='tel' {...register("phone", { required: { value: true, message: 'Phone Number Is Required' }, pattern: { value: /^\d{11}$/, message: 'please enter a valid number' } })} />
+                            type='tel' {...register("phone", {
+                                required: {
+                                    value: true,
+                                    message: 'Phone Number Is Required'
+                                },
+                                pattern: { value: /^\d{11}$/, message: 'please enter a valid number' }
+                            })} />
                         {errors.phone && <span className="text-error capitalize">{errors?.phone.message}</span>}
                     </label>
                     <label className="block text-gray-700 text-sm font-bold mb-2 space-y-3" htmlFor="address">

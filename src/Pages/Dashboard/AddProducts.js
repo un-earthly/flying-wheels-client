@@ -3,12 +3,13 @@ import Helmet from 'react-helmet'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import axiosPrivate from '../../api/axiosPrivate'
+import { ADD_PRODUCT_URL } from '../../urls'
 
 export default function AddProducts() {
   const { formState: { errors }, register, handleSubmit, reset } = useForm()
   const onSubmit = data => {
-    axiosPrivate.post('https://dry-bayou-12932.herokuapp.com/product', data)
-      .then(res => {
+    axiosPrivate.post(ADD_PRODUCT_URL, data)
+      .then(() => {
         toast.success('Added Successfully')
         reset()
       })

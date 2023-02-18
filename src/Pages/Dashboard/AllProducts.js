@@ -4,14 +4,16 @@ import { Link } from 'react-router-dom'
 import useProducts from '../../Hooks/useProducts'
 import Loading from '../../SharedComponents/Loading'
 import axiosPrivate from '../../api/axiosPrivate'
+import { GET_SINGLE_PRODUCT_URL } from '../../urls'
 export default function AllProducts() {
   const { isLoading, products, refetch } = useProducts()
   if (isLoading) {
     return <Loading></Loading>
   }
   const deleteProduct = id => {
-    axiosPrivate.delete('https://dry-bayou-12932.herokuapp.com/product/' + id)
-      .then(res => refetch())
+    axiosPrivate.delete(GET_SINGLE_PRODUCT_URL + id)
+      .then(() => refetch())
+      .catch(err => console.log(err))
   }
   return (
     <div>
