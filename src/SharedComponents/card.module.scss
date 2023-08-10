@@ -1,0 +1,57 @@
+/* Card.module.css */
+@layer {
+    .card {
+        background-color: #f3f4f6;
+        border-radius: 16px;
+        padding: 16px;
+        @w-96
+    }
+}
+
+.card:hover {
+    box-shadow: 8px 8px 16px #d1d9e6, -8px -8px 16px #ffffff;
+}
+
+.carousel {
+    max-width: 200px;
+    margin: 0 auto;
+}
+
+.carouselItem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f3f4f6;
+    border-radius: 12px;
+    padding: 4px;
+    box-shadow: 4px 4px 8px #d1d9e6, -4px -4px 8px #ffffff;
+}
+
+.cardBody {
+    margin-top: 16px;
+}
+
+.cardTitle {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.price {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.viewDetailsButton {
+    margin-top: 8px;
+    background-color: #f3f4f6;
+    border: none;
+    border-radius: 12px;
+    padding: 8px 16px;
+    cursor: pointer;
+    box-shadow: 4px 4px 8px #d1d9e6, -4px -4px 8px #ffffff;
+}
+
+.viewDetailsButton:hover {
+    background-color: #e5e7eb;
+}

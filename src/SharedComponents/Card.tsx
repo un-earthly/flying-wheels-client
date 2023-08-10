@@ -1,32 +1,36 @@
-import Link from 'next/link';
-import React from 'react'
+import Link from "next/link";
+import Image from "next/image";
+import React from "react";
+import { Carousel } from "react-responsive-carousel";
+import styles from "./card.module.scss"; // Import the custom CSS module
 
 export default function Card({ product }) {
-    const { name, desc, img, minOrdQty, availableQty, pricePerUnit, _id: id } = product;
-    return (
-        <div>
+    const { name, description, images, price } = product;
 
-            <div className="card lg:w-96 h-full hover:shadow-xl p-3 duration-500 animate__animated animate__fadeInRight animate__delay-1s">
-                <figure><img src={img} alt="Shoes" /></figure>
-                <div className="card-body space-y-2">
-                    <div className="tooltip" data-tip={name}>
-                        <h2 className="card-title">
-                            {name.length > 25 ? name.slice(0, 25) + '...' : name}
-                        </h2>
+    return (
+        <div className={`${styles.card} hover:${styles.shadow} duration-100`}>
+            <Carousel className={styles.carousel} autoPlay showThumbs={false}>
+                {images.map((image, index) => (
+                    <div key={index} className={styles.carouselItem}>
+                        <Image
+                            src={image}
+                            alt={`Image ${index + 1}`}
+                            width={100}
+                            height={100}
+                        />
                     </div>
-                    <div className="tooltip" data-tip={desc}>
-                        <p className='text-left'> {desc.length > 110 ? desc.slice(0, 110) + '...' : desc}</p>
-                    </div>
-                    <div>
-                        <p>Minimum Order Quantity:{minOrdQty} pcs</p>
-                        <p>Available Quantity:{availableQty} pcs</p>
-                        <p>Price Per Unit:${pricePerUnit}/pc</p>
-                    </div>
-                    <Link href={`/purchase/${id}`} className="card-actions justify-end">
-                        <div className="badge badge-outline border-secondary hover:bg-secondary cursor-pointer">Buy Now</div>
+                ))}
+            </Carousel>
+            <div className={styles.cardBody}>
+                <h2 className={styles.cardTitle}>{name}</h2>
+                <p>{description}</p>
+                <div className={styles.cardFooter}>
+                    <span className={styles.price}>${price}</span>
+                    <Link href={`/products/${product._id}`}>
+                        <button className={styles.viewDetailsButton}>View Details</button>
                     </Link>
                 </div>
             </div>
         </div>
-    )
+    );
 }
