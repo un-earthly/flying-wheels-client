@@ -10,11 +10,16 @@ module.exports = {
     extend: {
       fontFamily: {
         "Montserrat": ["Montserrat"]
-      }
+      },
+      colors: {
+        'deep-green': 'var(--deep-green)',
+        'sky-blue': 'var(--sky-blue)',
+        'earthy-brown': 'var(--earthy-brown)',
+      },
     },
   },
   plugins: [require("daisyui")],
   daisyui: {
-    themes: ["forest", "autumn"],
+    themes: ["light", "autumn"],
   },
 }
