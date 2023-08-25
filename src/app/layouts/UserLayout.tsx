@@ -28,7 +28,7 @@ export default function UserLayout({ children }: Props) {
                 <li><a className='w-full m-auto'>Item 2</a></li>
             </ul>
         </div>
-      
+
         <Button
             text='Get A Qoute'
             onClick={() => navigate("/get-a-qoute")}
@@ -38,14 +38,20 @@ export default function UserLayout({ children }: Props) {
         <div className="drawer">
             <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content flex flex-col">
-                <div className="w-full navbar sticky top-0 z-50 bg-gray-50/70 bg-blend-saturation backdrop-blur-lg">
+                <div className="w-full navbar py-10 sticky top-0 z-50 bg-gray-50/70 bg-blend-saturation backdrop-blur-lg">
                     <div className="flex-none lg:hidden">
                         <label htmlFor="my-drawer-3" className="btn btn-square btn-ghost">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-6 h-6 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                         </label>
                     </div>
-                    <div className="flex-1 px-2 mx-2 hover:text-primary duration-150  font-semibold text-xl">
+                    <div className="px-2 mx-2 w-full hover:text-primary duration-150  font-semibold text-xl">
                         <Link href="/">{appName}</Link>
+                    </div>
+                    <div className='bg-gray-200 w-full rounded-full mx-auto pr-4'>
+                        <input type="text" className="input flex-1 bg-transparent focus:outline-none" />
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-search" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                        </svg>
                     </div>
                     <div className="flex-none hidden lg:block">
                         <ul className="menu menu-horizontal">
@@ -62,7 +68,7 @@ export default function UserLayout({ children }: Props) {
                 <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
                 <ul className="menu p-4 w-80 h-full bg-base-200">
                     {menuLinks}
-                
+
                 </ul>
             </div>
 
