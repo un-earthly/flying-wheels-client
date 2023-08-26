@@ -4,26 +4,23 @@ import UserLayout from "@/app/layouts/UserLayout";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
+import ReviewCard from "@/SharedComponents/ReviewCard";
+import SmallTitle from "@/app/GlobalComponent/SmallTitle";
+import LergeTitle from "@/app/GlobalComponent/LergeTitle";
+import ProductCard from "@/app/GlobalComponent/ProductCard";
 export default function Home() {
   const navigator = useRouter()
   return (
     <UserLayout>
-      {/* <div className="space-y-10 min-h-screen">
-        
-      </div> */}
-      {/* <div className="relative h-screen overflow-hidden">
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="w-64 md:w-96">
-            <img src="/cycle-wheel.png" alt="Wheel" className="w-full" />
-          </div>
-        </div>
-      </div> */}
 
       <div className="p-10 bg-green-50">
-        <p className="text-center font-semibold uppercase">the heaven of wheels and bike accesories</p>
+        <SmallTitle title="the heaven of wheels and bike accesories" />
         <h1 className="lg:text-5xl md:w-3/4 px-10 text-center mx-auto m-0 uppercase font-bold">Are you looking for wheels and bike accesories?</h1>
-        {/* <p className="capitalize font-semibold text-center w-full">this Is The Perfect Place You've Came</p> */}
         <Image height={300} width={300} alt="banner" className="my-14 mx-auto hover:animate-spin" style={{
           animationDuration: "10s"
         }} src="/cycle-wheel.png" />
@@ -69,9 +66,7 @@ export default function Home() {
             </div>
 
             <div className="space-y-4">
-              <h1 className="text-3xl  font-bold">
-                WE BRING THE BEST QUALITY WHEELS
-              </h1>
+              <LergeTitle title=" WE BRING THE BEST QUALITY WHEELS" />
               <ul className="list-disc font-semibold mt-3 pl-6">
                 <li className="mb-2">Precision Craftsmanship</li>
                 <li className="mb-2">Innovative Designs</li>
@@ -83,16 +78,9 @@ export default function Home() {
               <Button text="Explore More" styles="h-12 bg-green-900 " />
             </div>
             <div className="flex items-start justify-start mt-10 md:flex-col space-x-2">
-              <div className="flex items-center justify-center space-x-2">
-                <div className="h-3 w-3 bg-green-400 rounded-full"></div>
-                <p className="text-md font-bold">
-                  WHAT WE DO!
-                </p>
-              </div>
+              <SmallTitle title=" WHAT WE DO!" />
               <div className="w-3/4 space-y-5">
-                <h1 className="text-3xl uppercase font-bold">
-                  we make the cycling world more interesting.
-                </h1>
+                <LergeTitle title=" we make the cycling world more interesting." />
                 <p>
                   Charge your electric vehicle at home using one of our smart home char ge solutions or gain access to over 3,000 public charging.
                 </p>
@@ -107,19 +95,12 @@ export default function Home() {
               </div>
             </div>
 
-
-
-
           </div>
-
-
-
-
         </div>
 
 
+
         <div className="rounded-lg p-3 group overflow-hidden w-2/4" >
-          {/* Images on Right Side */}
           <Image width={300} height={300}
             style={{ animationDuration: "30s" }} className="group-hover:animate-spin"
             src="/icon-wheel.png" alt="Wheel Manufacturing" />
@@ -129,12 +110,17 @@ export default function Home() {
           <Image width={300} height={300}
             style={{ animationDuration: "15s" }} className="group-hover:animate-spin"
             src="/wheel.png" alt="Wheel Manufacturing" />
+        </div>
+      </div>
 
+      <div className="text-center p-10 space-y-10">
+        <SmallTitle title="featured products" />
+        <LergeTitle  title="Checkout some of our Ready Stock" />
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-10 w-full">
+          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map(e => <ProductCard />)}
         </div>
 
-
-
-      </div>
+</div>
 
 
       <div className="relative w-full">
@@ -149,22 +135,33 @@ export default function Home() {
         </div>
       </div>
 
-      <div className='my-10 relative'>
-        <h1 className="text-3xl font-bold uppercase text-center">What our client says</h1>
+      <div className='my-10 relative text-center'>
+        <SmallTitle
+          title="testimonials"
+        />
+        <LergeTitle title="What our client says" />
 
         <div>
           <Swiper
-            spaceBetween={50}
-            slidesPerView={3}
-            onSlideChange={() => console.log('slide change')}
+            modules={[Navigation, Pagination, Scrollbar, A11y]}
+            spaceBetween={0}
+            slidesPerView={1}
+            navigation
+            pagination={{ clickable: true }}
             onSwiper={(swiper) => console.log(swiper)}
+            onSlideChange={() => console.log('slide change')}
+            autoplay={true}
+            style={{ width: '100%', }}
           >
-            <SwiperSlide>Slide 1</SwiperSlide>
-            <SwiperSlide>Slide 2</SwiperSlide>
-            <SwiperSlide>Slide 3</SwiperSlide>
-            <SwiperSlide>Slide 4</SwiperSlide>
-            ...
+            {
+              [1, 2, 4, 4].map((item) => (
+                <SwiperSlide >
+                  <ReviewCard />
+                </SwiperSlide>)
+              )
+            }
           </Swiper>
+
         </div>
       </div>
 
