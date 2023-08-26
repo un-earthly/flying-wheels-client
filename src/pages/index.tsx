@@ -13,8 +13,15 @@ import ReviewCard from "@/SharedComponents/ReviewCard";
 import SmallTitle from "@/app/GlobalComponent/SmallTitle";
 import LergeTitle from "@/app/GlobalComponent/LergeTitle";
 import ProductCard from "@/app/GlobalComponent/ProductCard";
+import Loading from "@/SharedComponents/Loading";
+import { useEffect, useState } from "react";
 export default function Home() {
   const navigator = useRouter()
+  // let loading = true
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    setTimeout(() => setLoading(false), 5000);
+  })
   return (
     <UserLayout>
 
@@ -30,28 +37,30 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="bg-green-100 p-10 backdrop-blur-3xl">
+      <div className="bg-green-50 p-10 backdrop-blur-3xl">
         <h1 className="md:text-4xl font-semibold text-center uppercase">
           Featured Categories
         </h1>
 
-        <div className="flex items-center my-10 space-x-10">
-          <CategoryCard
-            icon={"/icon-wheel.png"}
-            title="Wheels"
-          />
-          <CategoryCard
-            icon={"/icon-wheel.png"}
-
-            title="Wheels"
-          />
-          <CategoryCard
-            icon={"/icon-wheel.png"}
-
-            title="Wheels bike"
-          />
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 my-10 gap-10">
+          {
+            [1, 2, 3, 4, 5, 6].map(e => loading ? <Loading key={e} height="8rem" width="full" /> : <CategoryCard
+              key={e}
+              icon={"/icon-wheel.png"}
+              title="Wheels"
+            />)
+          }
         </div>
       </div>
+      <div className="text-center p-10 space-y-10">
+        <SmallTitle title="featured products" />
+        <LergeTitle title="Checkout some of our Ready Stock" />
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-10 w-full">
+          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map(e => loading ? <Loading key={e} height="25rem" width="full" /> : <ProductCard key={e} />)}
+        </div>
+        <Button text="Show More" styles="h-10 btn-wide uppercase" onClick={() => navigator.push("/products")} />
+      </div>
+
 
 
       <div className="flex flex-col md:flex-row justify-between items-center py-16 px-8  backdrop-blur-3xl bg-green-200 rounded-lg">
@@ -113,15 +122,6 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="text-center p-10 space-y-10">
-        <SmallTitle title="featured products" />
-        <LergeTitle  title="Checkout some of our Ready Stock" />
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-10 w-full">
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map(e => <ProductCard />)}
-        </div>
-
-</div>
-
 
       <div className="relative w-full">
         <div className="relative w-full h-2/4">
@@ -155,7 +155,7 @@ export default function Home() {
           >
             {
               [1, 2, 4, 4].map((item) => (
-                <SwiperSlide >
+                <SwiperSlide key={item} >
                   <ReviewCard />
                 </SwiperSlide>)
               )

@@ -1,9 +1,18 @@
-import React from 'react'
+import React from 'react';
 
-export default function Loading() {
-    return (
-        <div className='flex items-center justify-center min-h-screen bg-base-100'>
-            <progress className="progress w-56"></progress>
-        </div>
-    )
+interface SkeletonProps {
+    width: string;
+    height: string;
+    styles?: boolean;
 }
+
+const Loading: React.FC<SkeletonProps> = ({ width, height, styles }) => {
+    return (
+        <div
+            className={`bg-green-200 duration-150 animate-pulse ${styles}`}
+            style={{ width, height }}
+        ></div>
+    );
+};
+
+export default Loading;

@@ -16,7 +16,7 @@ const ProductCard = ({
     category = 'Default Category',
     price = '$0.00',
     rating = 0,
-}: Props) => {
+}: Partial<Props>) => {
     return (
         <div className="rounded w-full overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
             <div className="relative group overflow-hidden">
