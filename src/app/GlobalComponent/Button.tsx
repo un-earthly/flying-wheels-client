@@ -10,12 +10,12 @@ type ButtonProps = {
 
 const Button: React.FC<ButtonProps> = ({ styles, text, onClick,  isOutlined = false }) => {
 
-    const classes = `py-1 px-12 font-semibold ${styles} rounded-tl-box duration-150 rounded-br-box hover:rounded-tl-none hover:rounded-tr-box hover:rounded-br-none`
+    const classes = `py-1 px-12 font-semibold  rounded-tl-box duration-150 rounded-br-box hover:rounded-tl-none hover:rounded-tr-box hover:rounded-br-none`
     
     return (
         <button
             type="button"
-            className={`${classes} ${isOutlined ? " border-deep-green hover:bg-deep-green hover:text-white text-black border-2" : "bg-black text-white hover:bg-deep-green"}`}
+            className={`${classes}  ${isOutlined ? " border-deep-green hover:bg-deep-green hover:text-white text-black border-2" : "bg-black text-white hover:bg-deep-green"} ${styles}`}
             onClick={onClick}
         >
             <div className="flex items-center justify-center">
