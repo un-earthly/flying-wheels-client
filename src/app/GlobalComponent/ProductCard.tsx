@@ -18,10 +18,10 @@ const ProductCard = ({
     rating = 0,
 }: Partial<Props>) => {
     return (
-        <div className="rounded w-full overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
+        <div className="rounded w-full overflow-hidden shadow-md hover:border-2 hover:shadow-xl transition-shadow duration-300">
             <div className="relative group overflow-hidden">
                 <img
-                    className="w-full duration-300 transition-transform transform-gpu group-hover:scale-125"
+                    className="w-full duration-300 transition-transform transform-gpu group-hover:scale-105"
                     src={imageSrc}
                     alt={productName}
                 />
